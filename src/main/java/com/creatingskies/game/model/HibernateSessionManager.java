@@ -9,7 +9,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.creatingskies.game.model.user.User;
+import com.creatingskies.game.model.company.Company;
+import com.creatingskies.game.model.company.Group;
+import com.creatingskies.game.model.company.Player;
+import com.creatingskies.game.model.company.Team;
+import com.creatingskies.game.model.management.User;
 
 public class HibernateSessionManager {
 
@@ -24,6 +28,10 @@ public class HibernateSessionManager {
 			Configuration config = new Configuration();
 			
 			config.addAnnotatedClass(User.class);
+			config.addAnnotatedClass(Company.class);
+			config.addAnnotatedClass(Group.class);
+			config.addAnnotatedClass(Team.class);
+			config.addAnnotatedClass(Player.class);
 			
 			config.configure();
 			serviceRegistry = new StandardServiceRegistryBuilder()
