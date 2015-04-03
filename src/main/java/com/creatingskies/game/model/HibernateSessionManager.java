@@ -14,6 +14,8 @@ import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
 import com.creatingskies.game.model.company.Team;
 import com.creatingskies.game.model.user.User;
+import com.creatingskies.game.model.user.UserDao;
+import com.creatingskies.game.model.user.User.Type;
 
 public class HibernateSessionManager {
 
@@ -38,6 +40,8 @@ public class HibernateSessionManager {
 					.applySettings(config.getProperties()).build();
 			
 		    sessionFactory = config.buildSessionFactory(serviceRegistry);
+		    
+		    initStartupUser();
 		    return sessionFactory;
 		} catch (Throwable e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
@@ -54,6 +58,21 @@ public class HibernateSessionManager {
 	}
 
 	public static void shutdown() {
-		getSessionFactory().close();
+		sessionFactory.close();
+	}
+	
+	private static void initStartupUser(){
+		UserDao userDao = new UserDao();
+		
+		if(userDao.findUser("admin") == null){
+			User user = new User();
+			user.setFirstName("Raymond");
+			user.setLastName("Francisco");
+			user.setUsername("franciscor");
+			user.setPassword("holdon");
+			user.setType(Type.ADMIN);
+			userDao.save(user);
+		}
+		
 	}
 }
