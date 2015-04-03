@@ -2,7 +2,9 @@ package com.creatingskies.game.model;
 
 import java.io.Serializable;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 public abstract class GenericDAO implements Serializable{
@@ -14,6 +16,19 @@ public abstract class GenericDAO implements Serializable{
 		IRecord record = (IRecord) session.createCriteria(recordClass)
 							.add(Restrictions.eq("idNo", IdNo))
 							.uniqueResult();
+		session.close();
+		return record;
+	}
+	
+	public IRecord find(Class<? extends IRecord> recordClass,Criterion... criterion){
+		Session session = HibernateSessionManager.openSession();
+		Criteria criteria = session.createCriteria(recordClass);
+		if(criterion != null){
+			for(Criterion c : criterion){
+				criteria.add(c);
+			}
+		}
+		IRecord record = (IRecord) criteria.uniqueResult();
 		session.close();
 		return record;
 	}

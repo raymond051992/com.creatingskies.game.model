@@ -1,4 +1,4 @@
-package com.creatingskies.game.model.management;
+package com.creatingskies.game.model.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

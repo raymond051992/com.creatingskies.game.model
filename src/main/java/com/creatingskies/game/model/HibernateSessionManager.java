@@ -13,16 +13,16 @@ import com.creatingskies.game.model.company.Company;
 import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
 import com.creatingskies.game.model.company.Team;
-import com.creatingskies.game.model.management.User;
+import com.creatingskies.game.model.user.User;
 
 public class HibernateSessionManager {
 
 	private static final Logger LOGGER = Logger.getLogger(HibernateSessionManager.class.getName());
 	
-	private static SessionFactory sessionFactory = createSessionFactory();
+	private static SessionFactory sessionFactory = buildSessionFactory();
 	private static ServiceRegistry serviceRegistry;
 	
-	private static SessionFactory createSessionFactory() {
+	public static SessionFactory buildSessionFactory() {
 		try {
 			// Create the SessionFactory from hibernate.cfg.xml
 			Configuration config = new Configuration();
