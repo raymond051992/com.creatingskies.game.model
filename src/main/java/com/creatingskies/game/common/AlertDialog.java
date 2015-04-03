@@ -11,6 +11,6 @@ public class AlertDialog extends Alert{
         setHeaderText(headerText);
         setContentText(content);
         getDialogPane().getStylesheets()
-        	.add(AlertDialog.class.getResource("../resources/css/dialog.css").toString());
+        	.add("/css/dialog.css");
 	}
 }
