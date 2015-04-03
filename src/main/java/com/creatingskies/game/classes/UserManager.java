@@ -5,13 +5,15 @@ import com.creatingskies.game.model.user.User;
 
 public class UserManager {
 
-	private User currentUser;
+	private static User currentUser;
+	
+	private UserManager(){}
 
-	public User getCurrentUser() {
+	public static User getCurrentUser() {
 		return currentUser;
 	}
 
-	public void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
+	public static void setCurrentUser(User user) {
+		currentUser =  user;
 	}
 }

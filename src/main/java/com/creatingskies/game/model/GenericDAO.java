@@ -2,11 +2,15 @@ package com.creatingskies.game.model;
 
 import java.io.Serializable;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
+@Transactional
 public abstract class GenericDAO implements Serializable{
 
 	private static final long serialVersionUID = 8959532670136780528L;
@@ -35,24 +39,50 @@ public abstract class GenericDAO implements Serializable{
 	
 	public void save(IRecord record){
 		Session session = HibernateSessionManager.openSession();
-		session.save(record);
-		session.close();
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+			session.save(record);
+			tx.commit();
+		}catch(Exception e){
+			tx.rollback();
+		}finally{
+			session.close();
+		}
 	}
 	
 	public void saveOrUpdate(IRecord record){
 		Session session = HibernateSessionManager.openSession();
-		session.saveOrUpdate(record);
-		session.close();
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+			session.saveOrUpdate(record);
+			tx.commit();
+		}catch(Exception e){
+			tx.rollback();
+		}finally{
+			session.close();
+		}
 	}
 	
 	public void delete(IRecord record) throws Exception {
-		Session session = HibernateSessionManager.openSession(); 
-		IRecord fetchedRecord = find(record.getClass(), record.getIdNo());
-		if(fetchedRecord == null){
-			throw new Exception("Unable to delete. No records found with idNo = " + record.getIdNo());
-		}
+		Session session = HibernateSessionManager.openSession();
+		Transaction tx = null;
 		
-		session.delete(fetchedRecord);
-		session.close();
+		try{
+			IRecord fetchedRecord = find(record.getClass(), record.getIdNo());
+			
+			if(fetchedRecord == null){
+				throw new Exception("Unable to delete. No records found with idNo = " + record.getIdNo());
+			}
+			
+			tx = session.beginTransaction();
+			session.delete(fetchedRecord);
+			tx.commit();
+		}catch(Exception e){
+			tx.rollback();
+		}finally{
+			session.close();
+		}
 	}
 }

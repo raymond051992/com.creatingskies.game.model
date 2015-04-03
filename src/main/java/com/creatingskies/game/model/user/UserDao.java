@@ -12,5 +12,10 @@ public class UserDao extends GenericDAO{
 		return (User) find(User.class,
 							Restrictions.eq("username", username));
 	}
+	
+	public SecurityQuestion findSecurityQuestion(String code){
+		return (SecurityQuestion) find(SecurityQuestion.class,
+										Restrictions.eq("code", code));
+	}
 
 }

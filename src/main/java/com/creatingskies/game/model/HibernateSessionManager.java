@@ -1,5 +1,6 @@
 package com.creatingskies.game.model;
 
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,8 +14,10 @@ import com.creatingskies.game.model.company.Company;
 import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
 import com.creatingskies.game.model.company.Team;
+import com.creatingskies.game.model.user.SecurityQuestion;
 import com.creatingskies.game.model.user.User;
 import com.creatingskies.game.model.user.UserDao;
+import com.creatingskies.game.model.user.User.Status;
 import com.creatingskies.game.model.user.User.Type;
 
 public class HibernateSessionManager {
@@ -30,6 +33,7 @@ public class HibernateSessionManager {
 			Configuration config = new Configuration();
 			
 			config.addAnnotatedClass(User.class);
+			config.addAnnotatedClass(SecurityQuestion.class);
 			config.addAnnotatedClass(Company.class);
 			config.addAnnotatedClass(Group.class);
 			config.addAnnotatedClass(Team.class);
@@ -63,14 +67,30 @@ public class HibernateSessionManager {
 	
 	private static void initStartupUser(){
 		UserDao userDao = new UserDao();
+		SecurityQuestion defaultSecurityQuestion = userDao.findSecurityQuestion("default");
+		
+		if(defaultSecurityQuestion == null){
+			defaultSecurityQuestion = new SecurityQuestion();
+			defaultSecurityQuestion.setCode("default");
+			defaultSecurityQuestion.setQuestion("In what city were you born?");
+			userDao.save(defaultSecurityQuestion);
+		}
 		
 		if(userDao.findUser("admin") == null){
 			User user = new User();
-			user.setFirstName("Raymond");
-			user.setLastName("Francisco");
-			user.setUsername("franciscor");
-			user.setPassword("holdon");
+			user.setFirstName("Admin");
+			user.setLastName("Admin");
+			user.setUsername("admin");
+			user.setPassword("admin");
 			user.setType(Type.ADMIN);
+			user.setStatus(Status.ACTIVE);
+			user.setSecurityQuestion(defaultSecurityQuestion);
+			user.setSecurityQuestionAnswer("Pasig City");
+			
+			user.setEntryBy("dev");
+			user.setEntryDate(new Date());
+			
+			System.out.println("tests");
 			userDao.save(user);
 		}
 		
