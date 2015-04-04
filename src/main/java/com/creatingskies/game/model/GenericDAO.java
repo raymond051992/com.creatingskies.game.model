@@ -1,6 +1,7 @@
 package com.creatingskies.game.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -14,6 +15,14 @@ import org.hibernate.criterion.Restrictions;
 public abstract class GenericDAO implements Serializable{
 
 	private static final long serialVersionUID = 8959532670136780528L;
+	
+	@SuppressWarnings("unchecked")
+	public List<? extends IRecord> findAll(Class<? extends IRecord> recordClass){
+		Session session = HibernateSessionManager.openSession();
+		List<IRecord> records = session.createCriteria(recordClass).list();
+		session.close();
+		return records;
+	}
 	
 	public IRecord find(Class<? extends IRecord> recordClass,Integer IdNo){
 		Session session = HibernateSessionManager.openSession();
