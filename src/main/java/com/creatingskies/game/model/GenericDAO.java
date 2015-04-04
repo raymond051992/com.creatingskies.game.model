@@ -24,6 +24,21 @@ public abstract class GenericDAO implements Serializable{
 		return records;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<? extends IRecord> findAll(
+			Class<? extends IRecord> recordClass, Criterion... criterion) {
+		Session session = HibernateSessionManager.openSession();
+		Criteria criteria = session.createCriteria(recordClass);
+		if(criterion != null){
+			for(Criterion c : criterion){
+				criteria.add(c);
+			}
+		}
+		List<IRecord> records = criteria.list();
+		session.close();
+		return records;
+	}
+	
 	public IRecord find(Class<? extends IRecord> recordClass,Integer IdNo){
 		Session session = HibernateSessionManager.openSession();
 		IRecord record = (IRecord) session.createCriteria(recordClass)
