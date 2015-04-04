@@ -1,5 +1,6 @@
 package com.creatingskies.game.model.company;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,12 +21,13 @@ public class Company implements IAuditRecord{
 	
 	private Integer idNo;
 	private String name;
-	private List<Group> groups;
 	
 	private String entryBy;
 	private Date entryDate;
 	private String editBy;
 	private Date editDate;
+	
+	private List<Group> groups = new ArrayList<Group>();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

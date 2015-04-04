@@ -1,5 +1,6 @@
 package com.creatingskies.game.model.company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,8 @@ public class Group implements IRecord{
 	private Integer idNo;
 	private String name;
 	private Company company;
-	private List<Team> teams;
+	
+	private List<Team> teams = new ArrayList<Team>();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
