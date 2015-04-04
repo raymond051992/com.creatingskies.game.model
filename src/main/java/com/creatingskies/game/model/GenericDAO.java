@@ -1,6 +1,7 @@
 package com.creatingskies.game.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,6 +11,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+
+import com.creatingskies.game.classes.UserManager;
 
 @Transactional
 public abstract class GenericDAO implements Serializable{
@@ -62,29 +65,32 @@ public abstract class GenericDAO implements Serializable{
 	}
 	
 	public void save(IRecord record){
+		record = setAuditDetail(record);
 		Session session = HibernateSessionManager.openSession();
 		Transaction tx = null;
-		try{
+		try {
 			tx = session.beginTransaction();
 			session.save(record);
 			tx.commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			tx.rollback();
-		}finally{
+		} finally {
 			session.close();
 		}
 	}
 	
 	public void saveOrUpdate(IRecord record){
+		record = setAuditDetail(record);
 		Session session = HibernateSessionManager.openSession();
 		Transaction tx = null;
-		try{
+		try {
 			tx = session.beginTransaction();
 			session.saveOrUpdate(record);
 			tx.commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			tx.rollback();
-		}finally{
+			e.printStackTrace();
+		} finally {
 			session.close();
 		}
 	}
@@ -99,14 +105,27 @@ public abstract class GenericDAO implements Serializable{
 			if(fetchedRecord == null){
 				throw new Exception("Unable to delete. No records found with idNo = " + record.getIdNo());
 			}
-			
+
 			tx = session.beginTransaction();
 			session.delete(fetchedRecord);
 			tx.commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			tx.rollback();
-		}finally{
+		} finally {
 			session.close();
 		}
+	}
+	
+	public IRecord setAuditDetail(IRecord record){
+		if(record instanceof IAuditRecord){
+			if(record.getIdNo() == null){
+				((IAuditRecord) record).setEntryBy(UserManager.getCurrentUser().getUsername());
+				((IAuditRecord) record).setEntryDate(new Date());
+			} else {
+				((IAuditRecord) record).setEditBy(UserManager.getCurrentUser().getUsername());
+				((IAuditRecord) record).setEditDate(new Date());
+			}
+		}
+		return record;
 	}
 }
