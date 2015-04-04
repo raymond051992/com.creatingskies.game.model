@@ -24,29 +24,29 @@ public class HibernateSessionManager {
 
 	private static final Logger LOGGER = Logger.getLogger(HibernateSessionManager.class.getName());
 	
-	private static SessionFactory sessionFactory = buildSessionFactory();
+	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
 	
-	public static SessionFactory buildSessionFactory() {
+	public static void buildSessionFactory() {
 		try {
-			// Create the SessionFactory from hibernate.cfg.xml
-			Configuration config = new Configuration();
-			
-			config.addAnnotatedClass(User.class);
-			config.addAnnotatedClass(SecurityQuestion.class);
-			config.addAnnotatedClass(Company.class);
-			config.addAnnotatedClass(Group.class);
-			config.addAnnotatedClass(Team.class);
-			config.addAnnotatedClass(Player.class);
-			
-			config.configure();
-			serviceRegistry = new StandardServiceRegistryBuilder()
-					.applySettings(config.getProperties()).build();
-			
-		    sessionFactory = config.buildSessionFactory(serviceRegistry);
-		    
-		    initStartupUser();
-		    return sessionFactory;
+			if(sessionFactory == null){
+				Configuration config = new Configuration();
+				
+				config.addAnnotatedClass(User.class);
+				config.addAnnotatedClass(SecurityQuestion.class);
+				config.addAnnotatedClass(Company.class);
+				config.addAnnotatedClass(Group.class);
+				config.addAnnotatedClass(Team.class);
+				config.addAnnotatedClass(Player.class);
+				
+				config.configure();
+				serviceRegistry = new StandardServiceRegistryBuilder()
+						.applySettings(config.getProperties()).build();
+				
+			    sessionFactory = config.buildSessionFactory(serviceRegistry);
+			    
+			    initStartupUser();
+			}
 		} catch (Throwable e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			throw new ExceptionInInitializerError(e);
