@@ -20,7 +20,7 @@ import com.creatingskies.game.model.IRecord;
 
 public abstract class TableViewController extends ViewController{
 	
-	protected enum Action {
+	public enum Action {
 		VIEW, EDIT, DELETE, ACTIVATE;
 	}
 	
