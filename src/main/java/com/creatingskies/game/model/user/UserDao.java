@@ -31,5 +31,10 @@ public class UserDao extends GenericDAO{
 		return (SecurityQuestion) find(SecurityQuestion.class,
 										Restrictions.eq("code", code));
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SecurityQuestion> findAllSecurityQuestions(){
+		return (List<SecurityQuestion>) findAll(SecurityQuestion.class);
+	}
 
 }

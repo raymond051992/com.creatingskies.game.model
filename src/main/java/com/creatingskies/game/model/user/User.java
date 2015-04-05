@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.creatingskies.game.model.IAuditRecord;
 
@@ -160,4 +161,13 @@ public class User implements IAuditRecord{
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
 	}
+	
+	@Transient
+	public String getDisplayString(){
+		String displayString = "";
+		displayString = firstName != null ? firstName + " " : "";
+		displayString = lastName != null ? lastName : "";
+		return displayString;
+	}
+	
 }
