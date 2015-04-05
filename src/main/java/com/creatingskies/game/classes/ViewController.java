@@ -17,6 +17,10 @@ import com.creatingskies.game.common.MainLayout;
 
 public abstract class ViewController {
 	
+	public enum Action {
+		ADD, VIEW, EDIT, DELETE, ACTIVATE;
+	}
+	
 	public ViewController() {
 		((Label)MainLayout.getPrimaryStage()
 				.getScene().lookup("#viewTitle")).setText("");

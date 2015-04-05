@@ -1,6 +1,5 @@
 package com.creatingskies.game.classes;
 
-import com.creatingskies.game.classes.TableViewController.Action;
 import com.creatingskies.game.model.IRecord;
 
 public abstract class PropertiesViewController extends ViewController{
