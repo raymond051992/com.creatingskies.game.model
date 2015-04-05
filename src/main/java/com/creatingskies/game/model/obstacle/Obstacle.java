@@ -4,14 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
+import com.creatingskies.game.core.Game.Type;
 import com.creatingskies.game.model.IAuditRecord;
-import com.creatingskies.game.model.type.GameType;
 
 @Entity(name = "gObstacle")
 public class Obstacle implements IAuditRecord {
@@ -21,7 +21,7 @@ public class Obstacle implements IAuditRecord {
 	private Integer idNo;
 	private String name;
 	
-	private GameType gameType;
+	private Type gameType;
 	private Integer difficulty;
 	private byte[] icon;
 	
@@ -107,13 +107,12 @@ public class Obstacle implements IAuditRecord {
 		this.editDate = editDate;
 	}
 
-	@ManyToOne(targetEntity = GameType.class)
-	@JoinColumn(name = "gameTypeId")
-	public GameType getGameType() {
+	@Enumerated(EnumType.STRING)
+	public Type getGameType() {
 		return gameType;
 	}
 
-	public void setGameType(GameType gameType) {
+	public void setGameType(Type gameType) {
 		this.gameType = gameType;
 	}
 	

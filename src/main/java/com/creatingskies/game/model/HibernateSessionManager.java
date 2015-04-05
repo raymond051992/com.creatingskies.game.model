@@ -10,12 +10,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.creatingskies.game.core.Game;
+import com.creatingskies.game.core.GameWeather;
+import com.creatingskies.game.core.Tile;
+import com.creatingskies.game.core.Weather;
 import com.creatingskies.game.model.company.Company;
 import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
 import com.creatingskies.game.model.company.Team;
 import com.creatingskies.game.model.obstacle.Obstacle;
-import com.creatingskies.game.model.type.GameType;
 import com.creatingskies.game.model.user.SecurityQuestion;
 import com.creatingskies.game.model.user.User;
 import com.creatingskies.game.model.user.User.Status;
@@ -40,8 +43,12 @@ public class HibernateSessionManager {
 				config.addAnnotatedClass(Group.class);
 				config.addAnnotatedClass(Team.class);
 				config.addAnnotatedClass(Player.class);
+				
+				config.addAnnotatedClass(Game.class);
+				config.addAnnotatedClass(Weather.class);
+				config.addAnnotatedClass(GameWeather.class);
+				config.addAnnotatedClass(Tile.class);
 				config.addAnnotatedClass(Obstacle.class);
-				config.addAnnotatedClass(GameType.class);
 				
 				config.configure();
 				serviceRegistry = new StandardServiceRegistryBuilder()
