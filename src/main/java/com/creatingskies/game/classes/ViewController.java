@@ -22,7 +22,7 @@ public abstract class ViewController {
 				.getScene().lookup("#viewTitle")).setText("");
 	}
 	
-	public void initialize(){
+	public void init(){
 		((Label)MainLayout.getPrimaryStage()
 				.getScene().lookup("#viewTitle")).setText(getViewTitle());
 		
