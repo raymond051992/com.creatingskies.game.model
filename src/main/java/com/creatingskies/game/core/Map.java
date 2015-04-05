@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.creatingskies.game.model.IAuditRecord;
 
@@ -108,6 +109,26 @@ public class Map implements IAuditRecord{
 	
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
+	}
+	
+	@Transient
+	public Tile getStartPoint(){
+		if(getTiles() != null){
+			return getTiles().stream()
+					.filter(t -> t.getStartPoint() == true)
+					.findFirst().orElse(null);
+		}
+		return null;
+	}
+	
+	@Transient
+	public Tile getEndPoint(){
+		if(getTiles() != null){
+			return getTiles().stream()
+					.filter(t -> t.getEndPoint() == true)
+					.findFirst().orElse(null);
+		}
+		return null;
 	}
 	
 }

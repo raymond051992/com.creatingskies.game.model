@@ -103,6 +103,13 @@ public abstract class ViewController {
 		}
 	}
 	
+	protected void close(){
+		List<Node> childrens = MainLayout.getRootLayout().getChildren().stream()
+            	.filter(c -> c instanceof Pane)
+            	.collect(Collectors.toList());
+		
+		childrens.remove(childrens.size() - 1);
+	}
 	
 	protected abstract String getViewTitle();
 }

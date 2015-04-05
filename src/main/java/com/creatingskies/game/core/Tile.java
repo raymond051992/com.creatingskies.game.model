@@ -21,6 +21,8 @@ public class Tile implements IRecord{
 	private Integer colIndex;
 	private Integer rowIndex;
 	private Boolean obstacle = false;
+	private Boolean startPoint = false;
+	private Boolean endPoint = false;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -76,5 +78,23 @@ public class Tile implements IRecord{
 
 	public void setObstacle(Boolean obstacle) {
 		this.obstacle = obstacle;
+	}
+	
+	@Column(nullable=false)
+	public Boolean getStartPoint() {
+		return startPoint;
+	}
+
+	public void setStartPoint(Boolean startPoint) {
+		this.startPoint = startPoint;
+	}
+
+	@Column(nullable=false)
+	public Boolean getEndPoint() {
+		return endPoint;
+	}
+
+	public void setEndPoint(Boolean endPoint) {
+		this.endPoint = endPoint;
 	}
 }
