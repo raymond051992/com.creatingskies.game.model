@@ -2,7 +2,6 @@ package com.creatingskies.game.core;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,9 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
-import com.creatingskies.game.core.Tile.Orientation;
 import com.creatingskies.game.model.IAuditRecord;
 
 @Entity(name="gMap")
@@ -113,23 +110,4 @@ public class Map implements IAuditRecord{
 		this.editDate = editDate;
 	}
 	
-	@Transient
-	public List<Tile> getHorizontalTiles(){
-		if(tiles != null && !tiles.isEmpty()){
-			return tiles.stream()
-					.filter(t -> t.getOrientation() == Orientation.HORIZONTAL)
-					.collect(Collectors.toList());
-		}
-		return null;
-	}
-	
-	@Transient
-	public List<Tile> getVerticalTiles(){
-		if(tiles != null && !tiles.isEmpty()){
-			return tiles.stream()
-					.filter(t -> t.getOrientation() == Orientation.VERTICAL)
-					.collect(Collectors.toList());
-		}
-		return null;
-	}
 }

@@ -2,8 +2,6 @@ package com.creatingskies.game.core;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,16 +14,12 @@ import com.creatingskies.game.model.IRecord;
 public class Tile implements IRecord{
 
 	private static final long serialVersionUID = 8791664261827955489L;
-
-	public enum Orientation{
-		HORIZONTAL,VERTICAL
-	}
 	
 	private Integer idNo;
 	private Map map;
 	private byte[] image;
-	private Orientation orientation;
-	private Integer orderNo;
+	private Integer colIndex;
+	private Integer rowIndex;
 	private Boolean obstacle = false;
 	
 	@Id
@@ -58,22 +52,21 @@ public class Tile implements IRecord{
 	}
 	
 	@Column(nullable=false)
-	@Enumerated(EnumType.STRING)
-	public Orientation getOrientation() {
-		return orientation;
+	public Integer getColIndex() {
+		return colIndex;
 	}
 	
-	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
+	public void setColIndex(Integer colIndex) {
+		this.colIndex = colIndex;
 	}
 	
 	@Column(nullable=false)
-	public Integer getOrderNo() {
-		return orderNo;
+	public Integer getRowIndex() {
+		return rowIndex;
 	}
-
-	public void setOrderNo(Integer orderNo) {
-		this.orderNo = orderNo;
+	
+	public void setRowIndex(Integer rowIndex) {
+		this.rowIndex = rowIndex;
 	}
 	
 	@Column(nullable=false)
