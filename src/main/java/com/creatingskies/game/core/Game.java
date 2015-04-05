@@ -1,10 +1,7 @@
 package com.creatingskies.game.core;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,10 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import com.creatingskies.game.core.Tile.Orientation;
 import com.creatingskies.game.model.IAuditRecord;
 
 @Entity(name="gGame")
@@ -31,8 +27,7 @@ public class Game implements IAuditRecord{
 	private String title;
 	private String description;
 	private Type type;
-	private List<GameWeather> weathers;
-	private List<Tile> tiles;
+	private Map map;
 	
 	private String entryBy;
 	private Date entryDate;
@@ -77,22 +72,14 @@ public class Game implements IAuditRecord{
 		this.type = type;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="game",targetEntity=GameWeather.class,orphanRemoval=true)
-	public List<GameWeather> getWeathers() {
-		return weathers;
+	@JoinColumn(name="mapIdNo")
+	@ManyToOne(targetEntity=Map.class)
+	public Map getMap() {
+		return map;
 	}
 	
-	public void setWeathers(List<GameWeather> weathers) {
-		this.weathers = weathers;
-	}
-	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="game",targetEntity=Tile.class,orphanRemoval=true)
-	public List<Tile> getTiles() {
-		return tiles;
-	}
-	
-	public void setTiles(List<Tile> tiles) {
-		this.tiles = tiles;
+	public void setMap(Map map) {
+		this.map = map;
 	}
 	
 	@Column(nullable=false)
@@ -127,25 +114,5 @@ public class Game implements IAuditRecord{
 	
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
-	}
-	
-	@Transient
-	public List<Tile> getHorizontalTiles(){
-		if(tiles != null && !tiles.isEmpty()){
-			return tiles.stream()
-					.filter(t -> t.getOrientation() == Orientation.HORIZONTAL)
-					.collect(Collectors.toList());
-		}
-		return null;
-	}
-	
-	@Transient
-	public List<Tile> getVerticalTiles(){
-		if(tiles != null && !tiles.isEmpty()){
-			return tiles.stream()
-					.filter(t -> t.getOrientation() == Orientation.VERTICAL)
-					.collect(Collectors.toList());
-		}
-		return null;
 	}
 }

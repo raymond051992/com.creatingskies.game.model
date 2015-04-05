@@ -1,11 +1,13 @@
 package com.creatingskies.game.classes;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -59,10 +61,16 @@ public abstract class ViewController {
 			backToMainButton.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
-	            	MainLayout.getRootLayout().getChildren().stream()
-	            	.filter(c -> c instanceof Pane)
-	            	.collect(Collectors.toList())
-	            	.clear();
+//	            	MainLayout.getRootLayout().getChildren().stream()
+//	            	.filter(c -> c instanceof Pane)
+//	            	.collect(Collectors.toList())
+//	            	.clear();
+	            	
+	            	List<Node> childrens = MainLayout.getRootLayout().getChildren().stream()
+	    	            	.filter(c -> c instanceof Pane)
+	    	            	.collect(Collectors.toList());
+	            	
+	            	childrens.remove(childrens.size() - 1);
 	            	
 					try {
 						FXMLLoader loader = new FXMLLoader();

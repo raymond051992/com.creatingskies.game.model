@@ -19,6 +19,10 @@ public abstract class GenericDAO implements Serializable{
 
 	private static final long serialVersionUID = 8959532670136780528L;
 	
+	public Session openSession(){
+		return HibernateSessionManager.openSession(); 
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<? extends IRecord> findAll(Class<? extends IRecord> recordClass){
 		Session session = HibernateSessionManager.openSession();
@@ -118,12 +122,14 @@ public abstract class GenericDAO implements Serializable{
 	
 	public IRecord setAuditDetail(IRecord record){
 		if(record instanceof IAuditRecord){
-			if(record.getIdNo() == null){
-				((IAuditRecord) record).setEntryBy(UserManager.getCurrentUser().getUsername());
-				((IAuditRecord) record).setEntryDate(new Date());
-			} else {
-				((IAuditRecord) record).setEditBy(UserManager.getCurrentUser().getUsername());
-				((IAuditRecord) record).setEditDate(new Date());
+			if(UserManager.getCurrentUser() != null){
+				if(record.getIdNo() == null){
+					((IAuditRecord) record).setEntryBy(UserManager.getCurrentUser().getUsername());
+					((IAuditRecord) record).setEntryDate(new Date());
+				} else {
+					((IAuditRecord) record).setEditBy(UserManager.getCurrentUser().getUsername());
+					((IAuditRecord) record).setEditDate(new Date());
+				}
 			}
 		}
 		return record;

@@ -11,7 +11,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.creatingskies.game.core.Game;
-import com.creatingskies.game.core.GameWeather;
+import com.creatingskies.game.core.Map;
+import com.creatingskies.game.core.MapWeather;
 import com.creatingskies.game.core.Tile;
 import com.creatingskies.game.core.Weather;
 import com.creatingskies.game.model.company.Company;
@@ -45,8 +46,9 @@ public class HibernateSessionManager {
 				config.addAnnotatedClass(Player.class);
 				
 				config.addAnnotatedClass(Game.class);
+				config.addAnnotatedClass(Map.class);
 				config.addAnnotatedClass(Weather.class);
-				config.addAnnotatedClass(GameWeather.class);
+				config.addAnnotatedClass(MapWeather.class);
 				config.addAnnotatedClass(Tile.class);
 				config.addAnnotatedClass(Obstacle.class);
 				

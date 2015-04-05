@@ -22,7 +22,7 @@ public class Tile implements IRecord{
 	}
 	
 	private Integer idNo;
-	private Game game;
+	private Map map;
 	private byte[] image;
 	private Orientation orientation;
 	private Integer orderNo;
@@ -34,14 +34,14 @@ public class Tile implements IRecord{
 		return idNo;
 	}
 	
-	@JoinColumn(name="gameIdNo",nullable=false)
-	@ManyToOne(targetEntity=Game.class)
-	public Game getGame() {
-		return game;
+	@JoinColumn(name="mapIdNo",nullable=false)
+	@ManyToOne(targetEntity=Map.class)
+	public Map getMap() {
+		return map;
 	}
 	
-	public void setGame(Game game) {
-		this.game = game;
+	public void setMap(Map map) {
+		this.map = map;
 	}
 	
 	public void setIdNo(Integer idNo) {

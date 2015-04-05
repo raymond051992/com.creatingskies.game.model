@@ -9,13 +9,13 @@ import javax.persistence.ManyToOne;
 
 import com.creatingskies.game.model.IRecord;
 
-@Entity(name="gGameWeather")
-public class GameWeather implements IRecord{
+@Entity(name="gMapWeather")
+public class MapWeather implements IRecord{
 	
 	private static final long serialVersionUID = 4425950601965006108L;
 	
 	private Integer idNo;
-	private Game game;
+	private Map map;
 	private Weather weather;
 	
 	@Id
@@ -28,14 +28,14 @@ public class GameWeather implements IRecord{
 		this.idNo = idNo;
 	}
 	
-	@JoinColumn(name="gameIdNo",nullable=false)
-	@ManyToOne(targetEntity=Game.class)
-	public Game getGame() {
-		return game;
+	@JoinColumn(name="mapIdNo",nullable=false)
+	@ManyToOne(targetEntity=Map.class)
+	public Map getMap() {
+		return map;
 	}
 	
-	public void setGame(Game game) {
-		this.game = game;
+	public void setMap(Map map) {
+		this.map = map;
 	}
 	
 	@JoinColumn(name="weatherIdNo",nullable=false)
