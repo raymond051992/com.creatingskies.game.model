@@ -19,12 +19,18 @@ import com.creatingskies.game.common.TableRowViewButton;
 import com.creatingskies.game.model.IRecord;
 
 public abstract class TableViewController extends ViewController{
-
-	private final int BUTTON_BAR_MIN_WIDTH_MULTIPLIER = 30;
-	private final int BUTTON_MIN_WIDTH = 20;
 	
 	protected enum Action {
 		VIEW, EDIT, DELETE, ACTIVATE;
+	}
+	
+	private final int BUTTON_BAR_MIN_WIDTH_MULTIPLIER = 30;
+	private final int BUTTON_MIN_WIDTH = 20;
+	
+	private Action currentAction;
+	
+	protected Action getCurrentAction() {
+		return currentAction;
 	}
 	
 	public abstract TableView<? extends IRecord> getTableView();
@@ -121,6 +127,7 @@ public abstract class TableViewController extends ViewController{
 				param.getTableView().getSelectionModel().select(index);
 				IRecord record = tableView.getSelectionModel().getSelectedItem();
 				if (record != null) {
+					currentAction = Action.VIEW;
 					viewRecord(record);
 				}
 			}
@@ -135,6 +142,7 @@ public abstract class TableViewController extends ViewController{
 				param.getTableView().getSelectionModel().select(index);
 				IRecord record = tableView.getSelectionModel().getSelectedItem();
 				if (record != null) {
+					currentAction = Action.EDIT;
 					editRecord(record);
 				}
 			}
@@ -149,6 +157,7 @@ public abstract class TableViewController extends ViewController{
 				param.getTableView().getSelectionModel().select(index);
 				IRecord record = tableView.getSelectionModel().getSelectedItem();
 				if (record != null) {
+					currentAction = Action.DELETE;
 					deleteRecord(record);
 				}
 			}
@@ -163,6 +172,7 @@ public abstract class TableViewController extends ViewController{
 				param.getTableView().getSelectionModel().select(index);
 				IRecord record = tableView.getSelectionModel().getSelectedItem();
 				if (record != null) {
+					currentAction = Action.ACTIVATE;
 					activateRecord(record);
 				}
 			}
