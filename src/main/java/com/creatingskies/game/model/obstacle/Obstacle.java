@@ -1,7 +1,5 @@
 package com.creatingskies.game.model.obstacle;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.Transient;
 
 import com.creatingskies.game.model.IAuditRecord;
 
@@ -149,36 +146,6 @@ public class Obstacle implements IAuditRecord {
 
 	public void setImageFileType(String imageFileType) {
 		this.imageFileType = imageFileType;
-	}
-	
-	@Transient
-	public void setImage(File file){
-		if(file != null){
-			image = new byte[(int) file.length()];
-			
-			try {
-			     FileInputStream fileInputStream = new FileInputStream(file);
-			     fileInputStream.read(image);
-			     fileInputStream.close();
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
-			
-			setImage(image);
-			setImageFileName(file.getName());
-			
-			String extension = "";
-
-			int dotPos = getImageFileName().lastIndexOf('.');
-			int slashPos = Math.max(getImageFileName().lastIndexOf('/'),
-					getImageFileName().lastIndexOf('\\'));
-
-			if (dotPos > slashPos) {
-			    extension = getImageFileName().substring(dotPos+1);
-			}
-			
-			setImageFileType(extension);
-		}
 	}
 	
 }

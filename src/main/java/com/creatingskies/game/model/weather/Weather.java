@@ -26,13 +26,17 @@ public class Weather implements IAuditRecord{
 	private String imageFileName;
 	private String imageFileType;
 	
+	private byte[] audio;
+	private String audioFileName;
+	private String audioFileType;
+	
 	private String entryBy;
 	private Date entryDate;
 	private String editBy;
 	private Date editDate;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getIdNo() {
 		return idNo;
 	}
@@ -41,7 +45,7 @@ public class Weather implements IAuditRecord{
 		this.idNo = idNo;
 	}
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -50,7 +54,7 @@ public class Weather implements IAuditRecord{
 		this.name = name;
 	}
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public Boolean getForRowing() {
 		return forRowing;
 	}
@@ -59,7 +63,7 @@ public class Weather implements IAuditRecord{
 		this.forRowing = forRowing;
 	}
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public Boolean getForCycling() {
 		return forCycling;
 	}
@@ -68,7 +72,7 @@ public class Weather implements IAuditRecord{
 		this.forCycling = forCycling;
 	}
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public Integer getDifficulty() {
 		return difficulty;
 	}
@@ -78,7 +82,7 @@ public class Weather implements IAuditRecord{
 	}
 	
 	@Lob
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public byte[] getImage() {
 		return image;
 	}
@@ -87,7 +91,7 @@ public class Weather implements IAuditRecord{
 		this.image = image;
 	}
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public String getImageFileName() {
 		return imageFileName;
 	}
@@ -96,7 +100,7 @@ public class Weather implements IAuditRecord{
 		this.imageFileName = imageFileName;
 	}
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public String getImageFileType() {
 		return imageFileType;
 	}
@@ -105,7 +109,7 @@ public class Weather implements IAuditRecord{
 		this.imageFileType = imageFileType;
 	}
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public String getEntryBy() {
 		return entryBy;
 	}
@@ -114,7 +118,7 @@ public class Weather implements IAuditRecord{
 		this.entryBy = entryBy;
 	}
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public Date getEntryDate() {
 		return entryDate;
 	}
@@ -138,4 +142,31 @@ public class Weather implements IAuditRecord{
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
 	}
+	
+	@Lob
+	public byte[] getAudio() {
+		return audio;
+	}
+
+	public void setAudio(byte[] audio) {
+		this.audio = audio;
+	}
+
+	public String getAudioFileName() {
+		return audioFileName;
+	}
+
+	public void setAudioFileName(String audioFileName) {
+		this.audioFileName = audioFileName;
+	}
+
+	public String getAudioFileType() {
+		return audioFileType;
+	}
+
+	public void setAudioFileType(String audioFileType) {
+		this.audioFileType = audioFileType;
+	}
+	
 }
+
