@@ -1,9 +1,11 @@
-package com.creatingskies.game.model;
+package com.creatingskies.game.model.type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.creatingskies.game.model.IRecord;
 
 @Entity(name = "gGameType")
 public class GameType implements IRecord {

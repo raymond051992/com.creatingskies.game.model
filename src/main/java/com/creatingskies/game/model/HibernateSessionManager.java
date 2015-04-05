@@ -15,11 +15,12 @@ import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
 import com.creatingskies.game.model.company.Team;
 import com.creatingskies.game.model.obstacle.Obstacle;
+import com.creatingskies.game.model.type.GameType;
 import com.creatingskies.game.model.user.SecurityQuestion;
 import com.creatingskies.game.model.user.User;
-import com.creatingskies.game.model.user.UserDao;
 import com.creatingskies.game.model.user.User.Status;
 import com.creatingskies.game.model.user.User.Type;
+import com.creatingskies.game.model.user.UserDao;
 
 public class HibernateSessionManager {
 

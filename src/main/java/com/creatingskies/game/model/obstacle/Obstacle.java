@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.creatingskies.game.model.GameType;
 import com.creatingskies.game.model.IAuditRecord;
+import com.creatingskies.game.model.type.GameType;
 
 @Entity(name = "gObstacle")
 public class Obstacle implements IAuditRecord {
