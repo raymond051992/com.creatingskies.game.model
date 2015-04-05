@@ -21,7 +21,7 @@ import com.creatingskies.game.model.IRecord;
 public abstract class TableViewController extends ViewController{
 	
 	public enum Action {
-		NEW, VIEW, EDIT, DELETE, ACTIVATE;
+		ADD, VIEW, EDIT, DELETE, ACTIVATE;
 	}
 	
 	private final int BUTTON_BAR_MIN_WIDTH_MULTIPLIER = 30;
