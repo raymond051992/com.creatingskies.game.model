@@ -1,16 +1,17 @@
 package com.creatingskies.game.model.obstacle;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Transient;
 
-import com.creatingskies.game.core.Game.Type;
 import com.creatingskies.game.model.IAuditRecord;
 
 @Entity(name = "gObstacle")
@@ -21,9 +22,13 @@ public class Obstacle implements IAuditRecord {
 	private Integer idNo;
 	private String name;
 	
-	private Type gameType;
-	private Integer difficulty;
-	private byte[] icon;
+	private Boolean forRowing = false;
+	private Boolean forCycling = false;
+	private Integer difficulty = 0;
+	
+	private byte[] image;
+	private String imageFileName;
+	private String imageFileType;
 	
 	private String entryBy;
 	private Date entryDate;
@@ -49,6 +54,7 @@ public class Obstacle implements IAuditRecord {
 		this.name = name;
 	}
 
+	@Column(nullable = false)
 	public Integer getDifficulty() {
 		return difficulty;
 	}
@@ -57,12 +63,14 @@ public class Obstacle implements IAuditRecord {
 		this.difficulty = difficulty;
 	}
 
-	public byte[] getIcon() {
-		return icon;
+	@Lob
+	@Column(nullable = false)
+	public byte[] getImage() {
+		return image;
 	}
 
-	public void setIcon(byte[] icon) {
-		this.icon = icon;
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	@Override
@@ -107,13 +115,71 @@ public class Obstacle implements IAuditRecord {
 		this.editDate = editDate;
 	}
 
-	@Enumerated(EnumType.STRING)
-	public Type getGameType() {
-		return gameType;
+	@Column(nullable = false)
+	public Boolean getForRowing() {
+		return forRowing;
 	}
 
-	public void setGameType(Type gameType) {
-		this.gameType = gameType;
+	public void setForRowing(Boolean forRowing) {
+		this.forRowing = forRowing;
+	}
+
+	@Column(nullable = false)
+	public Boolean getForCycling() {
+		return forCycling;
+	}
+
+	public void setForCycling(Boolean forCycling) {
+		this.forCycling = forCycling;
+	}
+
+	@Column(nullable = false)
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
+	@Column(nullable = false)
+	public String getImageFileType() {
+		return imageFileType;
+	}
+
+	public void setImageFileType(String imageFileType) {
+		this.imageFileType = imageFileType;
+	}
+	
+	@Transient
+	public void setImage(File file){
+		if(file != null){
+			image = new byte[(int) file.length()];
+			
+			try {
+			     FileInputStream fileInputStream = new FileInputStream(file);
+			     fileInputStream.read(image);
+			     fileInputStream.close();
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	        }
+			
+			setImage(image);
+			setImageFileName(file.getName());
+			
+			String extension = "";
+
+			int dotPos = getImageFileName().lastIndexOf('.');
+			int slashPos = Math.max(getImageFileName().lastIndexOf('/'),
+					getImageFileName().lastIndexOf('\\'));
+
+			if (dotPos > slashPos) {
+			    extension = getImageFileName().substring(dotPos+1);
+			}
+			
+			setImageFileType(extension);
+		}
 	}
 	
 }
+
