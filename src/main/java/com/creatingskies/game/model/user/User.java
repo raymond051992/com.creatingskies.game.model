@@ -163,10 +163,10 @@ public class User implements IAuditRecord{
 	}
 	
 	@Transient
-	public String getDisplayString(){
+	public String getFullName(){
 		String displayString = "";
-		displayString = firstName != null ? firstName + " " : "";
-		displayString = lastName != null ? lastName : "";
+		displayString += firstName != null ? firstName + " " : "";
+		displayString += lastName != null ? lastName : "";
 		return displayString;
 	}
 	

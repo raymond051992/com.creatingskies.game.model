@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.creatingskies.game.model.GenericDAO;
 import com.creatingskies.game.model.user.User.Status;
+import com.creatingskies.game.model.user.User.Type;
 
 public class UserDao extends GenericDAO{
 
@@ -35,6 +36,12 @@ public class UserDao extends GenericDAO{
 	@SuppressWarnings("unchecked")
 	public List<SecurityQuestion> findAllSecurityQuestions(){
 		return (List<SecurityQuestion>) findAll(SecurityQuestion.class);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> findFilteredUsers(Type type, Status status){
+		return (List<User>) findAll(User.class, Restrictions.eq("type", type),
+				Restrictions.eq("status", status));
 	}
 
 }
