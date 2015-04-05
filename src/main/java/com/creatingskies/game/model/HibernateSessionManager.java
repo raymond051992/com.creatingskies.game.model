@@ -14,7 +14,6 @@ import com.creatingskies.game.core.Game;
 import com.creatingskies.game.core.Map;
 import com.creatingskies.game.core.MapWeather;
 import com.creatingskies.game.core.Tile;
-import com.creatingskies.game.core.Weather;
 import com.creatingskies.game.model.company.Company;
 import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
@@ -25,6 +24,7 @@ import com.creatingskies.game.model.user.User;
 import com.creatingskies.game.model.user.User.Status;
 import com.creatingskies.game.model.user.User.Type;
 import com.creatingskies.game.model.user.UserDao;
+import com.creatingskies.game.model.weather.Weather;
 
 public class HibernateSessionManager {
 

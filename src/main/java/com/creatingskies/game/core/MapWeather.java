@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.creatingskies.game.model.IRecord;
+import com.creatingskies.game.model.weather.Weather;
 
 @Entity(name="gMapWeather")
 public class MapWeather implements IRecord{
