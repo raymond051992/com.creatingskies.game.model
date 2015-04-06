@@ -14,6 +14,7 @@ import com.creatingskies.game.core.Game;
 import com.creatingskies.game.core.Map;
 import com.creatingskies.game.core.MapWeather;
 import com.creatingskies.game.core.Tile;
+import com.creatingskies.game.core.TileImage;
 import com.creatingskies.game.model.company.Company;
 import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
@@ -51,6 +52,8 @@ public class HibernateSessionManager {
 				config.addAnnotatedClass(MapWeather.class);
 				config.addAnnotatedClass(Tile.class);
 				config.addAnnotatedClass(Obstacle.class);
+				
+				config.addAnnotatedClass(TileImage.class);
 				
 				config.configure();
 				serviceRegistry = new StandardServiceRegistryBuilder()

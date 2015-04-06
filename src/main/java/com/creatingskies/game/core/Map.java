@@ -24,6 +24,8 @@ public class Map implements IAuditRecord{
 	private String name;
 	private String description;
 	private List<MapWeather> weathers;
+	private Integer width;
+	private Integer height;
 	private List<Tile> tiles;
 	
 	private String entryBy;
@@ -66,6 +68,24 @@ public class Map implements IAuditRecord{
 	
 	public void setWeathers(List<MapWeather> weathers) {
 		this.weathers = weathers;
+	}
+	
+	@Column(nullable=false)
+	public Integer getWidth() {
+		return width;
+	}
+	
+	public void setWidth(Integer width) {
+		this.width = width;
+	}
+	
+	@Column(nullable=false)
+	public Integer getHeight() {
+		return height;
+	}
+	
+	public void setHeight(Integer height) {
+		this.height = height;
 	}
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="map",targetEntity=Tile.class,orphanRemoval=true)
@@ -131,4 +151,30 @@ public class Map implements IAuditRecord{
 		return null;
 	}
 	
+	@Transient
+	public Boolean isReady(){
+		if(name == null || (name != null && name.isEmpty())){
+			return false;
+		}
+		if(description == null || (description != null && description.isEmpty())){
+			return false;
+		}
+		if(width < 1){
+			return false;
+		}
+		if(height < 1){
+			return false;
+		}
+		
+		if(tiles == null || (tiles != null && tiles.isEmpty())){
+			return false;
+		}
+		if(getStartPoint() == null){
+			return false;
+		}
+		if(getEndPoint() == null){
+			return false;
+		}
+		return true;
+	}
 }

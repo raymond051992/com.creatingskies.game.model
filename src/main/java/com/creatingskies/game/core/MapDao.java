@@ -24,4 +24,16 @@ public class MapDao extends GenericDAO{
 			session.close();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TileImage> findAllTileImages(){
+		Session session = openSession();
+		try{
+			List<TileImage> maps = session.createCriteria(TileImage.class)
+					.list();
+			return maps;
+		}finally{
+			session.close();
+		}
+	}
 }
