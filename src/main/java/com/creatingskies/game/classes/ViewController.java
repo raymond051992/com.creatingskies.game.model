@@ -108,7 +108,7 @@ public abstract class ViewController {
             	.filter(c -> c instanceof Pane)
             	.collect(Collectors.toList());
 		
-		childrens.remove(childrens.size() - 1);
+		childrens.clear();
 	}
 	
 	protected abstract String getViewTitle();
