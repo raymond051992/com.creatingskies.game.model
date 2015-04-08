@@ -24,6 +24,9 @@ public abstract class ViewController {
 	public ViewController() {
 		((Label)MainLayout.getPrimaryStage()
 				.getScene().lookup("#viewTitle")).setText("");
+		
+		((Label)MainLayout.getPrimaryStage()
+				.getScene().lookup("#currentLoggedUser")).setText("");
 	}
 	
 	public void init(){
@@ -35,6 +38,15 @@ public abstract class ViewController {
 		
 		Button backToMainButton = (Button)MainLayout.getPrimaryStage()
 				.getScene().lookup("#backToMainButton");
+		
+		if(UserManager.getCurrentUser() == null){
+			((Label)MainLayout.getPrimaryStage()
+					.getScene().lookup("#currentLoggedUser")).setText("");
+			
+		}else{
+			((Label)MainLayout.getPrimaryStage()
+					.getScene().lookup("#currentLoggedUser")).setText(UserManager.getCurrentUser().getFullName());
+		}
 		
 		try {
 			Class<?> mainController = Class.forName("com.creatingskies.game.main.MainController");
@@ -65,10 +77,6 @@ public abstract class ViewController {
 			backToMainButton.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
-//	            	MainLayout.getRootLayout().getChildren().stream()
-//	            	.filter(c -> c instanceof Pane)
-//	            	.collect(Collectors.toList())
-//	            	.clear();
 	            	
 	            	List<Node> childrens = MainLayout.getRootLayout().getChildren().stream()
 	    	            	.filter(c -> c instanceof Pane)
