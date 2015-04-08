@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.creatingskies.game.model.IAuditRecord;
@@ -28,6 +29,10 @@ public class Game implements IAuditRecord{
 	private String description;
 	private Type type;
 	private Map map;
+	private byte[] audio;
+	private String audioFileName;
+	private String audioFileType;
+	private Long audioFileSize;
 	
 	private String entryBy;
 	private Date entryDate;
@@ -82,6 +87,39 @@ public class Game implements IAuditRecord{
 		this.map = map;
 	}
 	
+	@Lob
+	public byte[] getAudio() {
+		return audio;
+	}
+	
+	public void setAudio(byte[] audio) {
+		this.audio = audio;
+	}
+	
+	public String getAudioFileName() {
+		return audioFileName;
+	}
+
+	public void setAudioFileName(String audioFileName) {
+		this.audioFileName = audioFileName;
+	}
+
+	public String getAudioFileType() {
+		return audioFileType;
+	}
+
+	public void setAudioFileType(String audioFileType) {
+		this.audioFileType = audioFileType;
+	}
+	
+	public Long getAudioFileSize() {
+		return audioFileSize;
+	}
+	
+	public void setAudioFileSize(Long audioFileSize) {
+		this.audioFileSize = audioFileSize;
+	}
+
 	@Column(nullable=false)
 	public String getEntryBy() {
 		return entryBy;

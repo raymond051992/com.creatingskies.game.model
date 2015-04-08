@@ -14,6 +14,16 @@ import javax.imageio.ImageIO;
 
 public final class Util {
 
+	public static boolean isBlank(String val){
+		if(val == null){
+			return true;
+		}
+		if(val.trim().isEmpty()){
+			return true;
+		}
+		return false;
+	}
+	
 	public static byte[] fileToByteArray(File file){
 		if(file != null){
 			byte[] image = new byte[(int) file.length()];
