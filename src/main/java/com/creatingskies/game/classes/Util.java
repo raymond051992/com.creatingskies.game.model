@@ -10,8 +10,10 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -165,7 +167,7 @@ public final class Util {
 			Calendar cal = Calendar.getInstance();
 			cal.clear();
 			cal.setTime(date);
-			return cal.get(Calendar.HOUR);
+			return cal.get(Calendar.HOUR_OF_DAY);
 		}else{
 			return 0;
 		}
@@ -195,5 +197,30 @@ public final class Util {
 		}else{
 			return null;
 		}
+	}
+	
+	public static List<Integer> getListOfHours(){
+		List<Integer> hours = new ArrayList<Integer>();
+		for(int i = 0;i < 24;i++){
+			hours.add(i);
+		}
+		
+		return hours;
+	}
+	
+	public static List<Integer> getListMinutes(){
+		List<Integer> minutes = new ArrayList<Integer>();
+		for(int i = 0;i < 60;i++){
+			minutes.add(i);
+		}
+		
+		return minutes;
+	}
+	
+	public static Date addDays(Date date,int days){
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.DATE, days);
+		return c.getTime();
 	}
 }
