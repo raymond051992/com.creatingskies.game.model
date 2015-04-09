@@ -20,7 +20,7 @@ public class Tile implements IRecord{
 	private byte[] image;
 	private Integer colIndex;
 	private Integer rowIndex;
-	private Boolean obstacle = false;
+	private Integer obstacleDifficulty;
 	private Boolean startPoint = false;
 	private Boolean endPoint = false;
 	
@@ -72,15 +72,6 @@ public class Tile implements IRecord{
 	}
 	
 	@Column(nullable=false)
-	public Boolean getObstacle() {
-		return obstacle;
-	}
-
-	public void setObstacle(Boolean obstacle) {
-		this.obstacle = obstacle;
-	}
-	
-	@Column(nullable=false)
 	public Boolean getStartPoint() {
 		return startPoint;
 	}
@@ -96,5 +87,13 @@ public class Tile implements IRecord{
 
 	public void setEndPoint(Boolean endPoint) {
 		this.endPoint = endPoint;
+	}
+	
+	public Integer getObstacleDifficulty() {
+		return obstacleDifficulty;
+	}
+
+	public void setObstacleDifficulty(Integer obstacleDifficulty) {
+		this.obstacleDifficulty = obstacleDifficulty;
 	}
 }
