@@ -19,6 +19,7 @@ import com.creatingskies.game.model.company.Company;
 import com.creatingskies.game.model.company.Group;
 import com.creatingskies.game.model.company.Player;
 import com.creatingskies.game.model.company.Team;
+import com.creatingskies.game.model.event.GameEvent;
 import com.creatingskies.game.model.obstacle.Obstacle;
 import com.creatingskies.game.model.user.SecurityQuestion;
 import com.creatingskies.game.model.user.User;
@@ -54,6 +55,7 @@ public class HibernateSessionManager {
 				config.addAnnotatedClass(Obstacle.class);
 				
 				config.addAnnotatedClass(TileImage.class);
+				config.addAnnotatedClass(GameEvent.class);
 				
 				config.configure();
 				serviceRegistry = new StandardServiceRegistryBuilder()
