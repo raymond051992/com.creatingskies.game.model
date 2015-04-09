@@ -20,4 +20,13 @@ public class CompanyDAO extends GenericDAO{
 		return (List<Group>) findAll(Group.class, Restrictions.eq("company", company));
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Team> findAllTeamsForGroup(Group group){
+		return (List<Team>) findAll(Team.class, Restrictions.eq("group", group));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Player> findAllPlayersForTeam(Team team){
+		return (List<Player>) findAll(Player.class, Restrictions.eq("team", team));
+	}
 }
