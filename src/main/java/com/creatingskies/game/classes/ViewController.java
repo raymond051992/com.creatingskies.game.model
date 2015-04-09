@@ -56,10 +56,7 @@ public abstract class ViewController {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	UserManager.setCurrentUser(null);
-	            	MainLayout.getRootLayout().getChildren().stream()
-	            	.filter(c -> c instanceof Pane)
-	            	.collect(Collectors.toList())
-	            	.clear();
+	            	close();
 	            	
 					try {
 						FXMLLoader loader = new FXMLLoader();
@@ -77,12 +74,7 @@ public abstract class ViewController {
 			backToMainButton.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
-	            	
-	            	List<Node> childrens = MainLayout.getRootLayout().getChildren().stream()
-	    	            	.filter(c -> c instanceof Pane)
-	    	            	.collect(Collectors.toList());
-	            	
-	            	childrens.remove(childrens.size() - 1);
+	            	close();
 	            	
 					try {
 						FXMLLoader loader = new FXMLLoader();
