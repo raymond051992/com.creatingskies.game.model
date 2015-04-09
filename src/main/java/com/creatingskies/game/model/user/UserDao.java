@@ -1,7 +1,11 @@
 package com.creatingskies.game.model.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.creatingskies.game.model.GenericDAO;
@@ -40,8 +44,46 @@ public class UserDao extends GenericDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<User> findFilteredUsers(Type type, Status status){
-		return (List<User>) findAll(User.class, Restrictions.eq("type", type),
-				Restrictions.eq("status", status));
+		Session session = openSession();
+		try{
+			List<Criterion> criterions = new ArrayList<Criterion>();
+			if(type != null){
+				criterions.add(Restrictions.eq("type", type));
+			}
+			if(status != null){
+				criterions.add(Restrictions.eq("status", status));
+			}
+			
+			
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			for(Criterion c : criterions){
+				criteria.add(c);
+			}
+			return criteria.list(); 
+		}finally{
+			session.close();
+		}
+		
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> findUsers(Criterion...criterions){
+		Session session = openSession();
+		try{
+			Criteria criteria = session.createCriteria(User.class);
+			
+			if(criterions != null && criterions.length > 0){
+				for(Criterion c : criterions){
+					criteria.add(c);
+				}
+			}
+			
+			return criteria.list();
+		}finally{
+			session.clear();
+		}
 	}
 
 }
