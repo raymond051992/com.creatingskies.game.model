@@ -14,14 +14,14 @@ import javax.persistence.TemporalType;
 
 import com.creatingskies.game.core.Game;
 import com.creatingskies.game.model.IAuditRecord;
-import com.creatingskies.game.model.company.Company;
+import com.creatingskies.game.model.company.Group;
 
 @Entity(name="gGameEvent")
 public class GameEvent implements IAuditRecord{
 
 	private static final long serialVersionUID = -6724495867688309904L;
 	private Integer idNo;
-	private Company company;
+	private Group group;
 	private Game game;
 	private Date eventDate;
 	
@@ -38,16 +38,6 @@ public class GameEvent implements IAuditRecord{
 	
 	public void setIdNo(Integer idNo) {
 		this.idNo = idNo;
-	}
-
-	@JoinColumn(name="companyIdNo",nullable=false)
-	@ManyToOne(targetEntity=Company.class)
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
 	}
 
 	@JoinColumn(name="gameIdNo",nullable=false)
@@ -102,5 +92,15 @@ public class GameEvent implements IAuditRecord{
 	
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
+	}
+
+	@ManyToOne(targetEntity = Group.class)
+	@JoinColumn(name = "groupIdNo", nullable = false)
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 }
