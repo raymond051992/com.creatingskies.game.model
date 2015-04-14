@@ -1,5 +1,7 @@
 package com.creatingskies.game.core;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import com.creatingskies.game.model.IRecord;
+import com.creatingskies.game.model.IAuditRecord;
 
 @Entity(name="gTileImage")
-public class TileImage implements IRecord{
+public class TileImage implements IAuditRecord{
 
 	private static final long serialVersionUID = 75752093358133615L;
 
@@ -19,6 +21,14 @@ public class TileImage implements IRecord{
 	private String fileName;
 	private String fileType;
 	private Long fileSize;
+	
+	private String owner;
+	private Boolean required = false;
+	
+	private String entryBy;
+	private Date entryDate;
+	private String editBy;
+	private Date editDate;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -66,4 +76,63 @@ public class TileImage implements IRecord{
 	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
 	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	@Override
+	@Column(nullable = false)
+	public String getEntryBy() {
+		return entryBy;
+	}
+
+	@Override
+	public void setEntryBy(String entryBy) {
+		this.entryBy = entryBy;
+	}
+
+	@Override
+	@Column(nullable = false)
+	public Date getEntryDate() {
+		return entryDate;
+	}
+
+	@Override
+	public void setEntryDate(Date entryDate) {
+		this.entryDate = entryDate;
+	}
+
+	@Override
+	public String getEditBy() {
+		return editBy;
+	}
+
+	@Override
+	public void setEditBy(String editBy) {
+		this.editBy = editBy;
+	}
+
+	@Override
+	public Date getEditDate() {
+		return editDate;
+	}
+
+	@Override
+	public void setEditDate(Date editDate) {
+		this.editDate = editDate;
+	}
+
+	public Boolean getRequired() {
+		return required;
+	}
+
+	public void setRequired(Boolean required) {
+		this.required = required;
+	}
+	
 }

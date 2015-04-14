@@ -2,6 +2,7 @@ package com.creatingskies.game.core;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.creatingskies.game.model.IAuditRecord;
 
@@ -21,14 +22,15 @@ public class Game implements IAuditRecord{
 	private static final long serialVersionUID = 3076486234883193667L;
 
 	public enum Type {
-		ROWING,CYCLING
+		ROWING, CYCLING
 	}
 	
 	private Integer idNo;
 	private String title;
 	private String description;
 	private Type type;
-	private Map map;
+	private Map map = new Map();
+	
 	private byte[] audio;
 	private String audioFileName;
 	private String audioFileType;
@@ -77,8 +79,8 @@ public class Game implements IAuditRecord{
 		this.type = type;
 	}
 	
-	@JoinColumn(name="mapIdNo")
-	@ManyToOne(targetEntity=Map.class)
+	@JoinColumn(name = "mapIdNo")
+	@OneToOne(targetEntity = Map.class, cascade = CascadeType.ALL)
 	public Map getMap() {
 		return map;
 	}

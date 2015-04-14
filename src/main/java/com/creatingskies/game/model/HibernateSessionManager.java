@@ -10,8 +10,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.creatingskies.game.classes.Util;
 import com.creatingskies.game.core.Game;
 import com.creatingskies.game.core.Map;
+import com.creatingskies.game.core.MapDao;
 import com.creatingskies.game.core.MapWeather;
 import com.creatingskies.game.core.Tile;
 import com.creatingskies.game.core.TileImage;
@@ -64,6 +66,7 @@ public class HibernateSessionManager {
 			    sessionFactory = config.buildSessionFactory(serviceRegistry);
 			    
 			    initStartupUser();
+			    initRequiredTileImages();
 			}
 		} catch (Throwable e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
@@ -111,6 +114,49 @@ public class HibernateSessionManager {
 			System.out.println("tests");
 			userDao.save(user);
 		}
+	}
+	
+	private static void initRequiredTileImages(){
+		MapDao mapDao = new MapDao();
+		TileImage startTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_START_POINT_OWNER);
+		TileImage endTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_END_POINT_OWNER);
+		TileImage rowingTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_ROWING_TILE_OWNER);
+		TileImage cyclingTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_CYCLING_TILE_OWNER);
+		
+		if(startTileImage == null){
+			createTileImage(mapDao, Constant.IMAGE_START_POINT_OWNER,
+					Constant.PATH_TILE_IMAGE_START_POINT_DEFAULT, true);
+		}
+		
+		if(endTileImage == null){
+			createTileImage(mapDao, Constant.IMAGE_END_POINT_OWNER,
+					Constant.PATH_TILE_IMAGE_END_POINT_DEFAULT, true);
+		}
+		
+		if(rowingTileImage == null){
+			createTileImage(mapDao, Constant.IMAGE_ROWING_TILE_OWNER,
+					Constant.PATH_TILE_IMAGE_ROWING_DEFAULT, false);
+		}
+		
+		if(cyclingTileImage == null){
+			createTileImage(mapDao, Constant.IMAGE_CYCLING_TILE_OWNER,
+					Constant.PATH_TILE_IMAGE_CYCLING_DEFAULT, false);
+		}
 		
 	}
+
+	private static void createTileImage(MapDao mapDao, String owner,
+			String filepath, Boolean required) {
+		TileImage tileImage = new TileImage();
+		tileImage.setOwner(owner);
+		tileImage.setImage(Util.stringUrlToByteArray(filepath));
+		tileImage.setFileName(filepath.substring(filepath.lastIndexOf("/") + 1));
+		tileImage.setFileType(Util.getFileExtension(tileImage.getFileName()));
+		tileImage.setEntryDate(new Date());
+		tileImage.setRequired(required);
+		tileImage.setEntryBy("dev");
+		tileImage.setFileSize(-1L);
+		mapDao.save(tileImage);
+	}
+	
 }

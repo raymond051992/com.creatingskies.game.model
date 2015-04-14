@@ -1,6 +1,5 @@
 package com.creatingskies.game.core;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,28 +9,25 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
-import com.creatingskies.game.model.IAuditRecord;
+import com.creatingskies.game.model.IRecord;
 
 @Entity(name="gMap")
-public class Map implements IAuditRecord{
+public class Map implements IRecord{
 
 	private static final long serialVersionUID = 1019227672929433839L;
 	
 	private Integer idNo;
-	private String name;
-	private String description;
-	private List<MapWeather> weathers;
 	private Integer width;
 	private Integer height;
-	private List<Tile> tiles;
 	
-	private String entryBy;
-	private Date entryDate;
-	private String editBy;
-	private Date editDate;
+	private TileImage defaultTileImage;
+	private List<Tile> tiles;
+	private List<MapWeather> weathers;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -41,24 +37,6 @@ public class Map implements IAuditRecord{
 	
 	public void setIdNo(Integer idNo) {
 		this.idNo = idNo;
-	}
-	
-	@Column(nullable=false)
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Column(nullable=false)
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
 	}
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="map",targetEntity=MapWeather.class,orphanRemoval=true)
@@ -97,38 +75,14 @@ public class Map implements IAuditRecord{
 		this.tiles = tiles;
 	}
 	
-	@Column(nullable=false)
-	public String getEntryBy() {
-		return entryBy;
+	@OneToOne(targetEntity = TileImage.class)
+	@JoinColumn(name = "defaultTileImageIdNo", nullable = false)
+	public TileImage getDefaultTileImage() {
+		return defaultTileImage;
 	}
-	
-	public void setEntryBy(String entryBy) {
-		this.entryBy = entryBy;
-	}
-	
-	@Column(nullable=false)
-	public Date getEntryDate() {
-		return entryDate;
-	}
-	
-	public void setEntryDate(Date entryDate) {
-		this.entryDate = entryDate;
-	}
-	
-	public String getEditBy() {
-		return editBy;
-	}
-	
-	public void setEditBy(String editBy) {
-		this.editBy = editBy;
-	}
-	
-	public Date getEditDate() {
-		return editDate;
-	}
-	
-	public void setEditDate(Date editDate) {
-		this.editDate = editDate;
+
+	public void setDefaultTileImage(TileImage defaultTileImage) {
+		this.defaultTileImage = defaultTileImage;
 	}
 	
 	@Transient
@@ -153,22 +107,6 @@ public class Map implements IAuditRecord{
 	
 	@Transient
 	public Boolean isReady(){
-		if(name == null || (name != null && name.isEmpty())){
-			return false;
-		}
-		if(description == null || (description != null && description.isEmpty())){
-			return false;
-		}
-		if(width < 1){
-			return false;
-		}
-		if(height < 1){
-			return false;
-		}
-		
-		if(tiles == null || (tiles != null && tiles.isEmpty())){
-			return false;
-		}
 		if(getStartPoint() == null){
 			return false;
 		}
@@ -177,4 +115,5 @@ public class Map implements IAuditRecord{
 		}
 		return true;
 	}
+
 }

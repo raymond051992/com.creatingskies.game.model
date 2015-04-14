@@ -94,6 +94,21 @@ public final class Util {
 		return null;
 	}
 	
+	public static byte[] stringUrlToByteArray(String url){
+		return stringUrlToByteArray(url, "png");
+	}
+	
+	public static byte[] stringUrlToByteArray(String url, String fileType){
+		if(url != null){
+			Image image = new Image(url);
+			
+			if(image != null){
+				return imageToByteArray(image, fileType);
+			}
+		}
+		return null;
+	}
+	
 	public static String getFileExtension(String fileName){
 		if(fileName != null){
 			String extension = "";

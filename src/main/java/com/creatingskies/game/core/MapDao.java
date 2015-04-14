@@ -53,4 +53,31 @@ public class MapDao extends GenericDAO{
 			session.close();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TileImage> findAllTileImages(Boolean requiredTiles){
+		Session session = openSession();
+		try{
+			List<TileImage> maps = session
+					.createCriteria(TileImage.class)
+					.add(Restrictions.eq("required", requiredTiles))
+					.list();
+			return maps;
+		}finally{
+			session.close();
+		}
+	}
+	
+	public TileImage findTileImageByOwner(String owner){
+		Session session = openSession();
+		try{
+			TileImage tileImage = (TileImage) session.createCriteria(TileImage.class)
+					.add(Restrictions.eq("owner", owner))
+					.uniqueResult();
+			return tileImage;
+		}finally{
+			session.close();
+		}
+	}
+	
 }

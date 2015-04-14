@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.creatingskies.game.model.IRecord;
+import com.creatingskies.game.model.obstacle.Obstacle;
 
 @Entity(name="gTile")
 public class Tile implements IRecord{
@@ -17,10 +18,12 @@ public class Tile implements IRecord{
 	
 	private Integer idNo;
 	private Map map;
-	private byte[] image;
 	private Integer colIndex;
 	private Integer rowIndex;
-	private Integer obstacleDifficulty;
+	
+	private TileImage image;
+	private Obstacle obstacle;
+	
 	private Boolean startPoint = false;
 	private Boolean endPoint = false;
 	
@@ -44,15 +47,6 @@ public class Tile implements IRecord{
 		this.idNo = idNo;
 	}
 
-	@Column(nullable=false)
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-	
 	@Column(nullable=false)
 	public Integer getColIndex() {
 		return colIndex;
@@ -88,12 +82,25 @@ public class Tile implements IRecord{
 	public void setEndPoint(Boolean endPoint) {
 		this.endPoint = endPoint;
 	}
-	
-	public Integer getObstacleDifficulty() {
-		return obstacleDifficulty;
+
+	@ManyToOne(targetEntity = TileImage.class)
+	@JoinColumn(name = "tileImageIdNo")
+	public TileImage getImage() {
+		return image;
 	}
 
-	public void setObstacleDifficulty(Integer obstacleDifficulty) {
-		this.obstacleDifficulty = obstacleDifficulty;
+	public void setImage(TileImage image) {
+		this.image = image;
 	}
+
+	@ManyToOne(targetEntity = Obstacle.class)
+	@JoinColumn(name = "obstacleIdNo")
+	public Obstacle getObstacle() {
+		return obstacle;
+	}
+
+	public void setObstacle(Obstacle obstacle) {
+		this.obstacle = obstacle;
+	}
+	
 }
