@@ -22,6 +22,7 @@ public class Obstacle implements IAuditRecord {
 	private Boolean forRowing = false;
 	private Boolean forCycling = false;
 	private Integer difficulty = 0;
+	private Integer radius = 0;
 	
 	private byte[] image;
 	private String imageFileName;
@@ -146,6 +147,14 @@ public class Obstacle implements IAuditRecord {
 
 	public void setImageFileType(String imageFileType) {
 		this.imageFileType = imageFileType;
+	}
+
+	public Integer getRadius() {
+		return radius;
+	}
+
+	public void setRadius(Integer radius) {
+		this.radius = radius;
 	}
 	
 }
