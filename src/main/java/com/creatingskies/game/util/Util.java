@@ -1,4 +1,4 @@
-package com.creatingskies.game.classes;
+package com.creatingskies.game.util;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

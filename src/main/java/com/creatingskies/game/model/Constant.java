@@ -17,4 +17,6 @@ public final class Constant {
 	public static final String IMAGE_ROWING_TILE_OWNER = "RowingTile";
 	public static final String IMAGE_CYCLING_TILE_OWNER = "CyclingTile";
 	
+	public static final String APP_NAME = "Game Editor";
+	
 }

@@ -10,7 +10,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.creatingskies.game.classes.Util;
 import com.creatingskies.game.core.Game;
 import com.creatingskies.game.core.Map;
 import com.creatingskies.game.core.MapDao;
@@ -29,6 +28,7 @@ import com.creatingskies.game.model.user.User.Status;
 import com.creatingskies.game.model.user.User.Type;
 import com.creatingskies.game.model.user.UserDao;
 import com.creatingskies.game.model.weather.Weather;
+import com.creatingskies.game.util.Util;
 
 public class HibernateSessionManager {
 
