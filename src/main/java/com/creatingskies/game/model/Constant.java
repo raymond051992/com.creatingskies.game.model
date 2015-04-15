@@ -12,10 +12,10 @@ public final class Constant {
 	public static final String PATH_TILE_IMAGE_ROWING_DEFAULT = "/images/tiles/water.png";
 	public static final String PATH_TILE_IMAGE_CYCLING_DEFAULT = "/images/tiles/grass.png";
 	
-	public static final String IMAGE_START_POINT_OWNER = "StartPoint";
-	public static final String IMAGE_END_POINT_OWNER = "EndPoint";
-	public static final String IMAGE_ROWING_TILE_OWNER = "RowingTile";
-	public static final String IMAGE_CYCLING_TILE_OWNER = "CyclingTile";
+	public static final String IMAGE_START_POINT_OWNER = "Start Point";
+	public static final String IMAGE_END_POINT_OWNER = "End Point";
+	public static final String IMAGE_ROWING_TILE_OWNER = "Rowing";
+	public static final String IMAGE_CYCLING_TILE_OWNER = "Cycling";
 	
 	public static final String APP_NAME = "Game Editor";
 	

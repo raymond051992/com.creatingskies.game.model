@@ -21,7 +21,8 @@ public class Tile implements IRecord{
 	private Integer colIndex;
 	private Integer rowIndex;
 	
-	private TileImage image;
+	private TileImage backImage;
+	private TileImage frontImage;
 	private Obstacle obstacle;
 	
 	private Boolean startPoint = false;
@@ -83,16 +84,6 @@ public class Tile implements IRecord{
 		this.endPoint = endPoint;
 	}
 
-	@ManyToOne(targetEntity = TileImage.class)
-	@JoinColumn(name = "tileImageIdNo")
-	public TileImage getImage() {
-		return image;
-	}
-
-	public void setImage(TileImage image) {
-		this.image = image;
-	}
-
 	@ManyToOne(targetEntity = Obstacle.class)
 	@JoinColumn(name = "obstacleIdNo")
 	public Obstacle getObstacle() {
@@ -101,6 +92,26 @@ public class Tile implements IRecord{
 
 	public void setObstacle(Obstacle obstacle) {
 		this.obstacle = obstacle;
+	}
+
+	@ManyToOne(targetEntity = TileImage.class)
+	@JoinColumn(name = "backTileImageIdNo")
+	public TileImage getBackImage() {
+		return backImage;
+	}
+
+	public void setBackImage(TileImage backImage) {
+		this.backImage = backImage;
+	}
+
+	@ManyToOne(targetEntity = TileImage.class)
+	@JoinColumn(name = "frontTileImageIdNo")
+	public TileImage getFrontImage() {
+		return frontImage;
+	}
+
+	public void setFrontImage(TileImage frontImage) {
+		this.frontImage = frontImage;
 	}
 	
 }
