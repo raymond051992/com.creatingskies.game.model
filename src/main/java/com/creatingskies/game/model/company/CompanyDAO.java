@@ -2,6 +2,10 @@ package com.creatingskies.game.model.company;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.creatingskies.game.model.GenericDAO;
@@ -17,7 +21,58 @@ public class CompanyDAO extends GenericDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<Group> findAllGroupsForCompany(Company company){
-		return (List<Group>) findAll(Group.class, Restrictions.eq("company", company));
+		Session session = openSession();
+		try{
+			List<Group> groups =  (List<Group>)session.createCriteria(Group.class)
+					.add(Restrictions.eq("company", company))
+					.addOrder(Order.asc("idNo"))
+					.list();
+				return groups;
+		}finally{
+			session.close();
+		}
+	}
+	
+	public Group findGroup(Integer idNo){
+		Session session = openSession();
+		try{
+			Group group = (Group) session.createCriteria(Group.class)
+								.add(Restrictions.eq("idNo", idNo))
+								.setFetchMode("teams", FetchMode.JOIN)
+								.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+								.uniqueResult(); 
+			
+			return group;
+		}finally{
+			session.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Team> findAllTeamByCompany(Integer companyIdNo){
+		Session session = openSession();
+		try{
+			return session.createCriteria(Team.class)
+					.createAlias("group", "group")
+					.createAlias("group.company", "company")
+					.add(Restrictions.eq("company.idNo", companyIdNo))
+					.list();
+		}finally{
+			session.close();
+		}
+	}
+	
+	public Team findTeam(Integer idNo){
+		Session session = openSession();
+		try{
+			return (Team) session.createCriteria(Team.class)
+					.add(Restrictions.eq("idNo", idNo))
+					.setFetchMode("players", FetchMode.JOIN)
+					.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+					.uniqueResult();
+		}finally{
+			session.close();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

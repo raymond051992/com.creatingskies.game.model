@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Transient;
 
 import com.creatingskies.game.model.IRecord;
 
@@ -55,6 +57,7 @@ public class Team implements IRecord{
 		this.group = group;
 	}
 	
+	@OrderBy("idNo")
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="team",targetEntity=Player.class,orphanRemoval=true)
 	public List<Player> getPlayers() {
 		return players;
@@ -62,5 +65,13 @@ public class Team implements IRecord{
 	
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+	}
+	
+	@Transient
+	public String getTeamName(){
+		if(getName() != null && getGroup() != null){
+			return getGroup().getName() + " - " + getName();
+		}
+		return null;
 	}
 }

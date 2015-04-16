@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.creatingskies.game.model.IRecord;
 
@@ -55,6 +56,7 @@ public class Group implements IRecord{
 		this.company = company;
 	}
 	
+	@OrderBy("idNo")
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="group",targetEntity=Team.class,orphanRemoval=true)
 	public List<Team> getTeams() {
 		return teams;
