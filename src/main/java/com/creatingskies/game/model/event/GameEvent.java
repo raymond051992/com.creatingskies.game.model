@@ -9,19 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.creatingskies.game.core.Game;
 import com.creatingskies.game.model.IAuditRecord;
-import com.creatingskies.game.model.company.Group;
+import com.creatingskies.game.model.company.Company;
 
 @Entity(name="gGameEvent")
 public class GameEvent implements IAuditRecord{
 
 	private static final long serialVersionUID = -6724495867688309904L;
 	private Integer idNo;
-	private Group group;
+	private Company company;
 	private Game game;
 	private Date eventDate;
 	
@@ -51,7 +49,6 @@ public class GameEvent implements IAuditRecord{
 	}
 
 	@Column(nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
 	public Date getEventDate() {
 		return eventDate;
 	}
@@ -93,14 +90,15 @@ public class GameEvent implements IAuditRecord{
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
 	}
-
-	@ManyToOne(targetEntity = Group.class)
-	@JoinColumn(name = "groupIdNo", nullable = false)
-	public Group getGroup() {
-		return group;
+	
+	@ManyToOne(targetEntity=Company.class)
+	@JoinColumn(name="companyIdNo",nullable=false)
+	public Company getCompany() {
+		return company;
 	}
-
-	public void setGroup(Group group) {
-		this.group = group;
+	
+	public void setCompany(Company company) {
+		this.company = company;
 	}
+	
 }
