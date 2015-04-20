@@ -80,4 +80,18 @@ public class MapDao extends GenericDAO{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<TileImage> findAllTileImagesWithOwner(){
+		Session session = openSession();
+		try{
+			List<TileImage> maps = session
+					.createCriteria(TileImage.class)
+					.add(Restrictions.isNotNull("owner"))
+					.list();
+			return maps;
+		}finally{
+			session.close();
+		}
+	}
+	
 }
