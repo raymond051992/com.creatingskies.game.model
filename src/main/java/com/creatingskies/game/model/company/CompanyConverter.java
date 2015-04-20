@@ -15,7 +15,6 @@ public class CompanyConverter extends StringConverter<Company>{
 
 	@Override
 	public Company fromString(String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

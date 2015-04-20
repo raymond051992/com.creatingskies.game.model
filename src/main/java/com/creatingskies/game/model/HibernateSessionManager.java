@@ -99,7 +99,7 @@ public class HibernateSessionManager {
 		
 		if(userDao.findUser("admin") == null){
 			User user = new User();
-			user.setFirstName("Admin");
+			user.setFirstName("Game");
 			user.setLastName("Admin");
 			user.setUsername("admin");
 			user.setPassword("admin");

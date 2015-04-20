@@ -24,6 +24,7 @@ public class TileImage implements IAuditRecord{
 	
 	private String owner;
 	private Boolean required = false;
+	private Integer difficulty = 0;
 	
 	private String entryBy;
 	private Date entryDate;
@@ -133,6 +134,14 @@ public class TileImage implements IAuditRecord{
 
 	public void setRequired(Boolean required) {
 		this.required = required;
+	}
+
+	public Integer getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Integer difficulty) {
+		this.difficulty = difficulty;
 	}
 	
 }
