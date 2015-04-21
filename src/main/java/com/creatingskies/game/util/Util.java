@@ -177,18 +177,18 @@ public final class Util {
 		}
     }
 	
-	public static int getHourFromDate(Date date){
+	public static Integer getHourFromDate(Date date){
 		if(date != null){
 			Calendar cal = Calendar.getInstance();
 			cal.clear();
 			cal.setTime(date);
-			return cal.get(Calendar.HOUR_OF_DAY);
+			return cal.get(Calendar.HOUR);
 		}else{
 			return 0;
 		}
 	}
 	
-	public static int getMinuteFromDate(Date date){
+	public static Integer getMinuteFromDate(Date date){
 		if(date != null){
 			Calendar cal = Calendar.getInstance();
 			cal.clear();
@@ -199,12 +199,12 @@ public final class Util {
 		}
 	}
 	
-	public static String getAMPMFromDate(Date date){
+	public static String getTimePeriodFromDate(Date date){
 		if(date != null){
 			Calendar cal = Calendar.getInstance();
 			cal.clear();
 			cal.setTime(date);
-			if(cal.get(Calendar.AM_PM) == 0){
+			if(cal.get(Calendar.AM) == 0){
 				return "AM";
 			}else{
 				return "PM";
@@ -216,7 +216,7 @@ public final class Util {
 	
 	public static List<Integer> getListOfHours(){
 		List<Integer> hours = new ArrayList<Integer>();
-		for(int i = 0;i < 24;i++){
+		for(int i = 1;i <= 12;i++){
 			hours.add(i);
 		}
 		
@@ -225,7 +225,7 @@ public final class Util {
 	
 	public static List<Integer> getListMinutes(){
 		List<Integer> minutes = new ArrayList<Integer>();
-		for(int i = 0;i < 60;i++){
+		for(int i = 1;i <= 59;i++){
 			minutes.add(i);
 		}
 		
