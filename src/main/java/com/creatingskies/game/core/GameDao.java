@@ -12,5 +12,14 @@ public class GameDao extends GenericDAO{
 	public List<Game> findAllGames(){
 		return (List<Game>) findAll(Game.class);
 	}
-
+	
+	public Game findGameWithDetails(Integer idNo){
+		Game game = (Game) super.find(Game.class, idNo);
+		if(game != null && game.getMap() != null){
+			Map map = new MapDao().findMapWithDetails(game.getMap().getIdNo());
+			map.getTiles().size();
+			game.setMap(map);
+		}
+		return game;
+	}
 }

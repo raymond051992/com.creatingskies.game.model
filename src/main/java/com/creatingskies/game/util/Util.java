@@ -204,7 +204,7 @@ public final class Util {
 			Calendar cal = Calendar.getInstance();
 			cal.clear();
 			cal.setTime(date);
-			if(cal.get(Calendar.AM) == 0){
+			if(cal.get(Calendar.AM_PM) == 0){
 				return "AM";
 			}else{
 				return "PM";
@@ -225,7 +225,7 @@ public final class Util {
 	
 	public static List<Integer> getListMinutes(){
 		List<Integer> minutes = new ArrayList<Integer>();
-		for(int i = 1;i <= 59;i++){
+		for(int i = 0;i <= 59;i++){
 			minutes.add(i);
 		}
 		
