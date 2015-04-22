@@ -122,6 +122,8 @@ public class HibernateSessionManager {
 		TileImage endTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_END_POINT_OWNER);
 		TileImage rowingTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_ROWING_TILE_OWNER);
 		TileImage cyclingTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_CYCLING_TILE_OWNER);
+		TileImage rowingPlayerTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_ROWING_PLAYER_OWNER);
+		TileImage cyclingPlayerTileImage = mapDao.findTileImageByOwner(Constant.IMAGE_CYCLING_PLAYER_OWNER);
 		
 		if(startTileImage == null){
 			createTileImage(mapDao, Constant.IMAGE_START_POINT_OWNER,
@@ -135,18 +137,33 @@ public class HibernateSessionManager {
 		
 		if(rowingTileImage == null){
 			createTileImage(mapDao, Constant.IMAGE_ROWING_TILE_OWNER,
-					Constant.PATH_TILE_IMAGE_ROWING_DEFAULT, false);
+					Constant.PATH_TILE_IMAGE_ROWING_DEFAULT, false, 0);
 		}
 		
 		if(cyclingTileImage == null){
 			createTileImage(mapDao, Constant.IMAGE_CYCLING_TILE_OWNER,
-					Constant.PATH_TILE_IMAGE_CYCLING_DEFAULT, false);
+					Constant.PATH_TILE_IMAGE_CYCLING_DEFAULT, false, 0);
+		}
+		
+		if(rowingPlayerTileImage == null){
+			createTileImage(mapDao, Constant.IMAGE_ROWING_PLAYER_OWNER,
+					Constant.PATH_TILE_IMAGE_ROWING_PLAYER_DEFAULT, false);
+		}
+		
+		if(cyclingPlayerTileImage == null){
+			createTileImage(mapDao, Constant.IMAGE_CYCLING_PLAYER_OWNER,
+					Constant.PATH_TILE_IMAGE_CYCLING_PLAYER_DEFAULT, false);
 		}
 		
 	}
 
 	private static void createTileImage(MapDao mapDao, String owner,
 			String filepath, Boolean required) {
+		createTileImage(mapDao, owner, filepath, required, null);
+	}
+	
+	private static void createTileImage(MapDao mapDao, String owner,
+			String filepath, Boolean required, Integer difficulty) {
 		TileImage tileImage = new TileImage();
 		tileImage.setOwner(owner);
 		tileImage.setImage(Util.stringUrlToByteArray(filepath));

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.creatingskies.game.model.GenericDAO;
@@ -42,32 +43,6 @@ public class MapDao extends GenericDAO{
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<TileImage> findAllTileImages(){
-		Session session = openSession();
-		try{
-			List<TileImage> maps = session.createCriteria(TileImage.class)
-					.list();
-			return maps;
-		}finally{
-			session.close();
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<TileImage> findAllTileImages(Boolean requiredTiles){
-		Session session = openSession();
-		try{
-			List<TileImage> maps = session
-					.createCriteria(TileImage.class)
-					.add(Restrictions.eq("required", requiredTiles))
-					.list();
-			return maps;
-		}finally{
-			session.close();
-		}
-	}
-	
 	public TileImage findTileImageByOwner(String owner){
 		Session session = openSession();
 		try{
@@ -81,15 +56,16 @@ public class MapDao extends GenericDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<TileImage> findAllTileImagesWithOwner(){
+	public List<TileImage> findAllTileImages(boolean withOwner){
 		Session session = openSession();
-		try{
+		try {
+			Criterion restriction = withOwner ? Restrictions.isNotNull("owner") : Restrictions.isNull("owner");
 			List<TileImage> maps = session
 					.createCriteria(TileImage.class)
-					.add(Restrictions.isNotNull("owner"))
+					.add(restriction)
 					.list();
 			return maps;
-		}finally{
+		} finally {
 			session.close();
 		}
 	}
