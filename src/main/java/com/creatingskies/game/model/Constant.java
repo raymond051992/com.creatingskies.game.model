@@ -4,8 +4,8 @@ public final class Constant {
 
 	private Constant(){}
 	
-	public static final int TILE_HEIGHT = 40;
-	public static final int TILE_WIDTH = 40;
+	public static final int TILE_HEIGHT = 16;
+	public static final int TILE_WIDTH = 16;
 	
 	public static final String PATH_TILE_IMAGE_START_POINT_DEFAULT = "/images/tiles/start.png";
 	public static final String PATH_TILE_IMAGE_END_POINT_DEFAULT = "/images/tiles/finish.png";
