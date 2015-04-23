@@ -12,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.creatingskies.game.model.IAuditRecord;
+import com.creatingskies.game.model.weather.Weather;
 
 @Entity(name="gGame")
 public class Game implements IAuditRecord{
@@ -30,6 +32,7 @@ public class Game implements IAuditRecord{
 	private String description;
 	private Type type;
 	private Map map = new Map();
+	private Weather weather;
 	
 	private byte[] audio;
 	private String audioFileName;
@@ -87,6 +90,16 @@ public class Game implements IAuditRecord{
 	
 	public void setMap(Map map) {
 		this.map = map;
+	}
+	
+	@JoinColumn(name = "weatherIdNo")
+	@ManyToOne(targetEntity = Weather.class)
+	public Weather getWeather() {
+		return weather;
+	}
+	
+	public void setWeather(Weather weather) {
+		this.weather = weather;
 	}
 	
 	@Lob
