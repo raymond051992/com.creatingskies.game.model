@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.creatingskies.game.core.Game;
+import com.creatingskies.game.core.GameResult;
 import com.creatingskies.game.core.Map;
 import com.creatingskies.game.core.MapDao;
 import com.creatingskies.game.core.MapWeather;
@@ -58,6 +59,7 @@ public class HibernateSessionManager {
 				
 				config.addAnnotatedClass(TileImage.class);
 				config.addAnnotatedClass(GameEvent.class);
+				config.addAnnotatedClass(GameResult.class);
 				
 				config.configure();
 				serviceRegistry = new StandardServiceRegistryBuilder()

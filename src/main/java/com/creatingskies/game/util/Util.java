@@ -19,11 +19,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
 import javax.imageio.ImageIO;
+
+import com.creatingskies.game.model.Constant;
 
 public final class Util {
 
@@ -238,4 +242,25 @@ public final class Util {
 		c.add(Calendar.DATE, days);
 		return c.getTime();
 	}
+	
+	public static Group bundle(Node... nodes){
+		Group group = new Group();
+		
+		for(Node node : nodes){
+			if(node != null){
+				group.getChildren().add(node);
+			}
+		}
+		
+		return group;
+	}
+	
+	public static double computeSpeed(double distance){
+		return computeSpeed(distance, 1.0);
+	}
+	
+	public static double computeSpeed(double distance, double duration){
+		return ((distance / ((duration * 1000) / Constant.FRAME_DURATION)) / Constant.AVERAGE_INPUT) * Constant.AVERAGE_BIKING_SPEED;
+	}
+	
 }
