@@ -2,6 +2,11 @@ package com.creatingskies.game.core;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+
 import com.creatingskies.game.model.GenericDAO;
 
 public class GameDao extends GenericDAO{
@@ -21,5 +26,29 @@ public class GameDao extends GenericDAO{
 			game.setMap(map);
 		}
 		return game;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<GameResult> findAllGameResults(Criterion...criterions){
+		Session session = openSession();
+		try {
+			Criteria criteria = session.createCriteria(GameResult.class);
+			
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			criteria.createAlias("group.company", "company");
+			criteria.addOrder(Order.asc("company.name"));
+			
+			if (criterions != null && criterions.length > 0) {
+				for (Criterion criterion : criterions) {
+					if (criterion != null) {
+						criteria.add(criterion);
+					}
+				}
+			}
+			
+			return criteria.list();
+		} finally {
+			session.close();
+		}
 	}
 }
