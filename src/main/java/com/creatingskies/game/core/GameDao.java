@@ -29,14 +29,18 @@ public class GameDao extends GenericDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<GameResult> findAllGameResults(Criterion...criterions){
+	public List<GameResult> findAllGameResults(Order dateOrder, Order speedOrder,
+			Criterion...criterions){
 		Session session = openSession();
 		try {
 			Criteria criteria = session.createCriteria(GameResult.class);
 			
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			criteria.createAlias("group", "resultGroup");
 			criteria.createAlias("group.company", "company");
-			criteria.addOrder(Order.asc("company.name"));
+			criteria.addOrder(dateOrder);
+			criteria.addOrder(speedOrder);
+			criteria.addOrder(Order.asc("resultGroup.name"));
 			
 			if (criterions != null && criterions.length > 0) {
 				for (Criterion criterion : criterions) {
