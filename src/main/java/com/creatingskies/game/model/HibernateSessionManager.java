@@ -175,6 +175,7 @@ public class HibernateSessionManager {
 		tileImage.setRequired(required);
 		tileImage.setEntryBy("dev");
 		tileImage.setFileSize(-1L);
+		tileImage.setDifficulty(difficulty);
 		mapDao.save(tileImage);
 	}
 	

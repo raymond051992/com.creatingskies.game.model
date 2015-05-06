@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,13 +26,27 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
 import javax.imageio.ImageIO;
 
 import com.creatingskies.game.model.Constant;
 
 public final class Util {
-
+	
+	private static Map<Double, Color> difficultyColorMap;
+	
+	static {
+		difficultyColorMap = new ConcurrentHashMap<Double, Color>();
+		difficultyColorMap.put(1.0, Color.VIOLET);
+		difficultyColorMap.put(2.0, Color.INDIGO);
+		difficultyColorMap.put(3.0, Color.DODGERBLUE);
+		difficultyColorMap.put(4.0, Color.GREEN);
+		difficultyColorMap.put(5.0, Color.YELLOW);
+		difficultyColorMap.put(6.0, Color.ORANGE);
+		difficultyColorMap.put(7.0, Color.RED);
+	}
+	
 	public static boolean isBlank(String val){
 		if(val == null){
 			return true;
@@ -261,6 +277,11 @@ public final class Util {
 	
 	public static double computeSpeed(double distance, double duration){
 		return ((distance / ((duration * 1000) / Constant.FRAME_DURATION)) / Constant.AVERAGE_INPUT) * Constant.AVERAGE_BIKING_SPEED;
+	}
+	
+	public static Color getDifficultyColor(Double difficulty){
+		Color color = difficultyColorMap.get(difficulty);
+		return color != null ? color : Color.TRANSPARENT;
 	}
 	
 }
