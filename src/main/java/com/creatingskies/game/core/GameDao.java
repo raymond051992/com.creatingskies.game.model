@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import com.creatingskies.game.model.GenericDAO;
 
@@ -49,6 +50,20 @@ public class GameDao extends GenericDAO{
 					}
 				}
 			}
+			
+			return criteria.list();
+		} finally {
+			session.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<GameResult> findAllGameResultsByGame(Game game){
+		Session session = openSession();
+		try {
+			Criteria criteria = session.createCriteria(GameResult.class);
+			criteria.add(Restrictions.eq("game", game));
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
 			return criteria.list();
 		} finally {
