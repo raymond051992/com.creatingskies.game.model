@@ -113,7 +113,6 @@ public class HibernateSessionManager {
 			user.setEntryBy("dev");
 			user.setEntryDate(new Date());
 			
-			System.out.println("tests");
 			userDao.save(user);
 		}
 	}
