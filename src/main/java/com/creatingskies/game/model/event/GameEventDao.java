@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
+import com.creatingskies.game.core.Game;
 import com.creatingskies.game.model.GenericDAO;
 
 public class GameEventDao extends GenericDAO{
@@ -35,5 +36,18 @@ public class GameEventDao extends GenericDAO{
 	
 	public GameEvent findEventByDate(Date date){
 		return (GameEvent) find(GameEvent.class, Restrictions.eq("eventDate", date));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<GameEvent> findAllGameEventByGame(Game game){
+		Session session = openSession();
+		try{
+			Criteria criteria = session.createCriteria(GameEvent.class);
+			criteria.add(Restrictions.eq("game", game));
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			return criteria.list();
+		}finally{
+			session.close();
+		}
 	}
 }
