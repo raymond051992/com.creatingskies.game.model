@@ -65,7 +65,8 @@ public class HibernateSessionManager {
 				serviceRegistry = new StandardServiceRegistryBuilder()
 						.applySettings(config.getProperties()).build();
 				
-			    sessionFactory = config.buildSessionFactory(serviceRegistry);
+			    sessionFactory = config
+			    		.buildSessionFactory(serviceRegistry);
 			    
 			    initStartupUser();
 			    initRequiredTileImages();
