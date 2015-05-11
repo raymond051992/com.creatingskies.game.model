@@ -172,7 +172,7 @@ public class HibernateSessionManager {
 		tileImage.setFileName(filepath.substring(filepath.lastIndexOf("/") + 1));
 		tileImage.setFileType(Util.getFileExtension(tileImage.getFileName()));
 		tileImage.setEntryDate(new Date());
-		tileImage.setRequired(required);
+		tileImage.setSystemDefined(true);
 		tileImage.setEntryBy("dev");
 		tileImage.setFileSize(-1L);
 		tileImage.setDifficulty(difficulty);

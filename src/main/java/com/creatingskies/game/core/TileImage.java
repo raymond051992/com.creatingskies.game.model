@@ -23,8 +23,8 @@ public class TileImage implements IAuditRecord{
 	private Long fileSize;
 	
 	private String owner;
-	private Boolean required = false;
 	private Integer difficulty = 0;
+	private Boolean systemDefined = false;
 	
 	private String entryBy;
 	private Date entryDate;
@@ -128,20 +128,20 @@ public class TileImage implements IAuditRecord{
 		this.editDate = editDate;
 	}
 
-	public Boolean getRequired() {
-		return required;
-	}
-
-	public void setRequired(Boolean required) {
-		this.required = required;
-	}
-
 	public Integer getDifficulty() {
 		return difficulty;
 	}
 
 	public void setDifficulty(Integer difficulty) {
 		this.difficulty = difficulty;
+	}
+
+	public Boolean getSystemDefined() {
+		return systemDefined;
+	}
+
+	public void setSystemDefined(Boolean systemDefined) {
+		this.systemDefined = systemDefined;
 	}
 	
 }

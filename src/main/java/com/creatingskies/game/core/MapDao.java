@@ -56,15 +56,20 @@ public class MapDao extends GenericDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<TileImage> findAllTileImages(boolean withOwner){
+	public List<TileImage> findAllTileImages(){
+		return (List<TileImage>) findAll(TileImage.class);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TileImage> findAllTileImages(Boolean systemDefined){
 		Session session = openSession();
 		try {
-			Criterion restriction = withOwner ? Restrictions.isNotNull("owner") : Restrictions.isNull("owner");
-			List<TileImage> maps = session
+			Criterion restriction = Restrictions.eq("systemDefined", systemDefined);
+			List<TileImage> list = session
 					.createCriteria(TileImage.class)
 					.add(restriction)
 					.list();
-			return maps;
+			return list;
 		} finally {
 			session.close();
 		}
