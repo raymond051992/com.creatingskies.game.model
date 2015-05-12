@@ -260,7 +260,19 @@ public final class Util {
 	}
 	
 	public static Group bundle(Node... nodes){
+		return bundle(null, null, nodes);
+	}
+	
+	public static Group bundle(Double layoutX, Double layoutY, Node... nodes){
 		Group group = new Group();
+		
+		if(layoutX != null){
+			group.setLayoutX(layoutX);
+		}
+		
+		if(layoutY != null){
+			group.setLayoutY(layoutY);
+		}
 		
 		for(Node node : nodes){
 			if(node != null){
