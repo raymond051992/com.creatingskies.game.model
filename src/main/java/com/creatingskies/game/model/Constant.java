@@ -7,7 +7,7 @@ public final class Constant {
 	public static final int TILE_HEIGHT = 40;
 	public static final int TILE_WIDTH = 40;
 	
-	public static final Double AVERAGE_INPUT = 4.0;
+	public static final Double AVERAGE_INPUT = 2.5;
 	public static final Double AVERAGE_BIKING_SPEED = 4.30556;
 	public static final Double FRAME_DURATION = 50.0;
 	
