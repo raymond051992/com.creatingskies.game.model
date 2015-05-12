@@ -119,7 +119,6 @@ public class User implements IAuditRecord{
 		this.securityQuestion = securityQuestion;
 	}
 	
-	@Column(nullable=false)
 	public String getSecurityQuestionAnswer() {
 		return securityQuestionAnswer;
 	}
