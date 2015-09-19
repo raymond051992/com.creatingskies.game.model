@@ -28,9 +28,6 @@ public class Tile implements IRecord{
 	private Boolean startPoint = false;
 	private Boolean endPoint = false;
 	
-	private Integer verticalTilt;
-	private Integer horizontalTilt;
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdNo() {
@@ -117,19 +114,4 @@ public class Tile implements IRecord{
 		this.frontImage = frontImage;
 	}
 	
-	public Integer getVerticalTilt() {
-		return verticalTilt;
-	}
-
-	public void setVerticalTilt(Integer verticalTilt) {
-		this.verticalTilt = verticalTilt;
-	}
-
-	public Integer getHorizontalTilt() {
-		return horizontalTilt;
-	}
-
-	public void setHorizontalTilt(Integer horizontalTilt) {
-		this.horizontalTilt = horizontalTilt;
-	}
 }

@@ -26,6 +26,9 @@ public class TileImage implements IAuditRecord{
 	private Integer difficulty = 0;
 	private Boolean systemDefined = false;
 	
+	private Integer verticalTilt = 0;
+	private Integer horizontalTilt = 0;
+	
 	private String entryBy;
 	private Date entryDate;
 	private String editBy;
@@ -86,6 +89,22 @@ public class TileImage implements IAuditRecord{
 		this.owner = owner;
 	}
 
+	public Integer getVerticalTilt() {
+		return verticalTilt;
+	}
+
+	public void setVerticalTilt(Integer verticalTilt) {
+		this.verticalTilt = verticalTilt;
+	}
+
+	public Integer getHorizontalTilt() {
+		return horizontalTilt;
+	}
+
+	public void setHorizontalTilt(Integer horizontalTilt) {
+		this.horizontalTilt = horizontalTilt;
+	}
+	
 	@Override
 	@Column(nullable = false)
 	public String getEntryBy() {
