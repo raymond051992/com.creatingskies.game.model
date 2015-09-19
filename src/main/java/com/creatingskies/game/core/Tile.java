@@ -28,10 +28,8 @@ public class Tile implements IRecord{
 	private Boolean startPoint = false;
 	private Boolean endPoint = false;
 	
-	private Integer upTilt;
-	private Integer downTilt;
-	private Integer leftTilt;
-	private Integer rightTilt;
+	private Integer verticalTilt;
+	private Integer horizontalTilt;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -119,36 +117,19 @@ public class Tile implements IRecord{
 		this.frontImage = frontImage;
 	}
 	
-	public Integer getUpTilt() {
-		return upTilt;
+	public Integer getVerticalTilt() {
+		return verticalTilt;
 	}
 
-	public void setUpTilt(Integer upTilt) {
-		this.upTilt = upTilt;
+	public void setVerticalTilt(Integer verticalTilt) {
+		this.verticalTilt = verticalTilt;
 	}
 
-	public Integer getDownTilt() {
-		return downTilt;
+	public Integer getHorizontalTilt() {
+		return horizontalTilt;
 	}
 
-	public void setDownTilt(Integer downTilt) {
-		this.downTilt = downTilt;
+	public void setHorizontalTilt(Integer horizontalTilt) {
+		this.horizontalTilt = horizontalTilt;
 	}
-
-	public Integer getLeftTilt() {
-		return leftTilt;
-	}
-
-	public void setLeftTilt(Integer leftTilt) {
-		this.leftTilt = leftTilt;
-	}
-
-	public Integer getRightTilt() {
-		return rightTilt;
-	}
-
-	public void setRightTilt(Integer rightTilt) {
-		this.rightTilt = rightTilt;
-	}
-	
 }
