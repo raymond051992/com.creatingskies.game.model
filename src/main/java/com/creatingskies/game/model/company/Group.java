@@ -24,7 +24,7 @@ public class Group implements IRecord{
 	private Integer idNo;
 	private String name;
 	private Company company;
-	
+	private Boolean archived = false;
 	private List<Team> teams = new ArrayList<Team>();
 	
 	@Id
@@ -65,4 +65,13 @@ public class Group implements IRecord{
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
+	
+	public Boolean getArchived() {
+		return archived;
+	}
+	
+	public void setArchived(Boolean archived) {
+		this.archived = archived;
+	}
+	
 }

@@ -26,8 +26,10 @@ public class Company implements IAuditRecord{
 	private Date entryDate;
 	private String editBy;
 	private Date editDate;
+	private Boolean archived = false;
 	
 	private List<Group> groups = new ArrayList<Group>();
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -90,4 +92,13 @@ public class Company implements IAuditRecord{
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
 	}
+	
+	public Boolean getArchived() {
+		return archived;
+	}
+	
+	public void setArchived(Boolean archived) {
+		this.archived = archived;
+	}
+	
 }

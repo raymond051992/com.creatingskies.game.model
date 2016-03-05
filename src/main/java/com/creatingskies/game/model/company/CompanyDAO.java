@@ -9,21 +9,40 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.creatingskies.game.model.GenericDAO;
+import com.creatingskies.game.model.HibernateSessionManager;
 
 public class CompanyDAO extends GenericDAO{
 
 	private static final long serialVersionUID = -1464594627674490498L;
 
+//	@SuppressWarnings("unchecked")
+//	public List<Company> findAllCompanies(){
+//		return (List<Company>) findAll(Company.class);
+//	}
+	
 	@SuppressWarnings("unchecked")
-	public List<Company> findAllCompanies(){
-		return (List<Company>) findAll(Company.class);
+	public List<Company> findAllCompanies(boolean showArchives){
+		Session session = HibernateSessionManager.openSession();
+		Criteria c = session.createCriteria(Company.class);
+		
+		if(!showArchives){
+			c.add(Restrictions.eqOrIsNull("archived", Boolean.FALSE));
+		}
+		
+		List<Company> records = c.list();
+		session.close();
+		return records;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Group> findAllGroupsForCompany(Company company){
+	public List<Group> findAllGroupsForCompany(Company company,boolean showArchives){
 		Session session = openSession();
 		try{
-			List<Group> groups =  (List<Group>)session.createCriteria(Group.class)
+			Criteria c = session.createCriteria(Group.class);
+			if(!showArchives){
+				c.add(Restrictions.eqOrIsNull("archived", Boolean.FALSE));
+			}
+			List<Group> groups =  c
 					.add(Restrictions.eq("company", company))
 					.addOrder(Order.asc("idNo"))
 					.list();
