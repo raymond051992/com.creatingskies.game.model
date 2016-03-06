@@ -165,7 +165,7 @@ public class HibernateSessionManager {
 	}
 	
 	private static void createTileImage(MapDao mapDao, String owner,
-			String filepath, Boolean required, Integer difficulty) {
+			String filepath, Boolean required, Integer hardness) {
 		TileImage tileImage = new TileImage();
 		tileImage.setOwner(owner);
 		tileImage.setImage(Util.stringUrlToByteArray(filepath));
@@ -175,7 +175,9 @@ public class HibernateSessionManager {
 		tileImage.setSystemDefined(true);
 		tileImage.setEntryBy("dev");
 		tileImage.setFileSize(-1L);
-		tileImage.setDifficulty(difficulty);
+		tileImage.setDifficulty(hardness);
+		tileImage.setVerticalTilt(hardness);
+		tileImage.setHorizontalTilt(hardness);
 		mapDao.save(tileImage);
 	}
 	

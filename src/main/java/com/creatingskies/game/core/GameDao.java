@@ -101,6 +101,19 @@ public class GameDao extends GenericDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<GameResult> findAllGameResultsByTile(Tile tile){
+		Session session = openSession();
+		try {
+			Query query = session.createQuery("select r from gGameResult r, gTile o"
+					+ " where r.game.map = o.map and o = :tile")
+					.setParameter("tile", tile);
+			return query.list();
+		} finally {
+			session.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<GameResult> findAllGameResultsByTileImage(TileImage tileImage){
 		Session session = openSession();
 		try {

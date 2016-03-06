@@ -28,6 +28,10 @@ public class Tile implements IRecord{
 	private Boolean startPoint = false;
 	private Boolean endPoint = false;
 	
+	private Integer difficulty = 0;
+	private Integer verticalTilt = 0;
+	private Integer horizontalTilt = 0;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdNo() {
@@ -112,6 +116,30 @@ public class Tile implements IRecord{
 
 	public void setFrontImage(TileImage frontImage) {
 		this.frontImage = frontImage;
+	}
+
+	public Integer getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Integer difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public Integer getVerticalTilt() {
+		return verticalTilt;
+	}
+
+	public void setVerticalTilt(Integer verticalTilt) {
+		this.verticalTilt = verticalTilt;
+	}
+
+	public Integer getHorizontalTilt() {
+		return horizontalTilt;
+	}
+
+	public void setHorizontalTilt(Integer horizontalTilt) {
+		this.horizontalTilt = horizontalTilt;
 	}
 	
 }
