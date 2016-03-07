@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.creatingskies.game.model.GenericDAO;
@@ -61,15 +60,17 @@ public class MapDao extends GenericDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<TileImage> findAllTileImages(Boolean systemDefined){
+	public List<TileImage> findAllTileImages(Boolean systemDefined,boolean archived){
 		Session session = openSession();
 		try {
-			Criterion restriction = Restrictions.eq("systemDefined", systemDefined);
-			List<TileImage> list = session
-					.createCriteria(TileImage.class)
-					.add(restriction)
-					.list();
-			return list;
+			Criteria c = session.createCriteria(TileImage.class);
+			c.add(Restrictions.eq("systemDefined", systemDefined));
+			
+			if(!archived){
+				c.add(Restrictions.disjunction(Restrictions.eq("archived", false),Restrictions.isNull("archived")));
+			}
+			
+			return c.list();
 		} finally {
 			session.close();
 		}

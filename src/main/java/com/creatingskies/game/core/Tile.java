@@ -141,5 +141,4 @@ public class Tile implements IRecord{
 	public void setHorizontalTilt(Integer horizontalTilt) {
 		this.horizontalTilt = horizontalTilt;
 	}
-	
 }

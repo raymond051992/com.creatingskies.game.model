@@ -29,6 +29,8 @@ public class TileImage implements IAuditRecord{
 	private Integer verticalTilt = 0;
 	private Integer horizontalTilt = 0;
 	
+	private Boolean archived = false;
+	
 	private String entryBy;
 	private Date entryDate;
 	private String editBy;
@@ -163,4 +165,11 @@ public class TileImage implements IAuditRecord{
 		this.systemDefined = systemDefined;
 	}
 	
+	public Boolean getArchived() {
+		return archived;
+	}
+	
+	public void setArchived(Boolean archived) {
+		this.archived = archived;
+	}
 }
