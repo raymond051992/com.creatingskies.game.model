@@ -76,4 +76,17 @@ public class MapDao extends GenericDAO{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<TileImage> findAllArchivedTileImages(){
+		Session session = openSession();
+		try {
+			Criteria c = session.createCriteria(TileImage.class);
+			c.add(Restrictions.eq("systemDefined", false));
+			c.add(Restrictions.eq("archived", true));
+			
+			return c.list();
+		} finally {
+			session.close();
+		}
+	}
 }
