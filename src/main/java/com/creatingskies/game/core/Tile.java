@@ -28,9 +28,8 @@ public class Tile implements IRecord{
 	private Boolean startPoint = false;
 	private Boolean endPoint = false;
 	
-	private Integer difficulty = 0;
-	private Integer verticalTilt = 0;
-	private Integer horizontalTilt = 0;
+	private Integer obstacleDifficulty = 0;
+	private Integer obstacleRadius = 0;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -118,27 +117,32 @@ public class Tile implements IRecord{
 		this.frontImage = frontImage;
 	}
 
-	public Integer getDifficulty() {
-		return difficulty;
+	public Integer getObstacleDifficulty() {
+		return obstacleDifficulty;
 	}
 
-	public void setDifficulty(Integer difficulty) {
-		this.difficulty = difficulty;
+	public void setObstacleDifficulty(Integer obstacleDifficulty) {
+		this.obstacleDifficulty = obstacleDifficulty;
 	}
 
-	public Integer getVerticalTilt() {
-		return verticalTilt;
+	public Integer getObstacleRadius() {
+		return obstacleRadius;
 	}
 
-	public void setVerticalTilt(Integer verticalTilt) {
-		this.verticalTilt = verticalTilt;
+	public void setObstacleRadius(Integer obstacleRadius) {
+		this.obstacleRadius = obstacleRadius;
+	}
+	
+	public void setObstacleFields(Obstacle obstacle) {
+		this.obstacle = obstacle;
+		
+		if(obstacle != null){
+			this.obstacleDifficulty = obstacle.getDifficulty();
+			this.obstacleRadius = obstacle.getRadius();
+		} else {
+			this.obstacleDifficulty = 0;
+			this.obstacleRadius = 0;
+		}
 	}
 
-	public Integer getHorizontalTilt() {
-		return horizontalTilt;
-	}
-
-	public void setHorizontalTilt(Integer horizontalTilt) {
-		this.horizontalTilt = horizontalTilt;
-	}
 }
