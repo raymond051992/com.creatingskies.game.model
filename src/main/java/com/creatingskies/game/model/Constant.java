@@ -11,6 +11,8 @@ public final class Constant {
 	public static final Double AVERAGE_BIKING_SPEED = 4.30556;
 	public static final Double FRAME_DURATION = 50.0;
 	
+	public static final double MAX_MOVESPEED = 3.0;
+	
 	public static final String PATH_TILE_IMAGE_PLACEHOLDER = "/images/tiles/placeholder.png";
 	
 	public static final String PATH_TILE_IMAGE_START_POINT_DEFAULT = "/images/tiles/start.png";
